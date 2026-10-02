@@ -18,4 +18,4 @@ Please review the documentation in the following order:
 *   [**Part 3: Feature-to-Design Traceability**](./stage1/stage1_part3.md)
     *   Traceability Matrix mapping features to classes and patterns.
 *   [**Part 4: Feature Implementation Explanations**](./stage1/stage1_part4.md)
-    *   Detailed architectural realization narratives for all 12 features (Deliverable 9).
+    *   Detailed architectural realization narratives for all 12 features.
