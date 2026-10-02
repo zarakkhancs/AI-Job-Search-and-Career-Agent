@@ -1,11 +1,11 @@
-# 1.4 Feature Realization and Traceability Explanations
+# 4.1 Feature Implementation Explanations
 
 **F01 — Resume Import & Parsing**
 *   **Related Use Case:** UC-01 Import Resume
 *   **Related Sequence Diagram:** SD-01 Import Resume
 *   **Classes involved:** `ResumeController`, `IngestionService`, `ExtractionStrategy`, `PDFResumeExtractor`, `AIEngineFacade`.
 *   **Important methods:** `IngestionService.ingestResume()`, `PDFResumeExtractor.extract()`.
-*   **Execution:** When a user uploads a PDF, the controller routes it to the `IngestionService`. The service utilizes the `PDFResumeExtractor` concrete strategy to pull raw text. This text is sent through the AI Facade for categorization via the Gemini API and saved to the database as structured data.
+*   **Execution:** When a user uploads a PDF, the controller routes it to the `IngestionService`. The service utilizes the `PDFResumeExtractor` concrete strategy to deterministically pull raw text. This text is then routed through the `AIEngineFacade` for AI-based categorization via the Gemini API and saved as structured data.
 
 **F02 — Job Posting Ingestion**
 *   **Related Use Case:** UC-02 Import Job Posting
@@ -31,16 +31,16 @@
 **F05 — Application Pipeline State Management**
 *   **Related Use Case:** UC-05 Manage Application Pipeline
 *   **Related Sequence Diagram:** SD-05 Manage Application Pipeline
-*   **Classes involved:** `ApplicationService`, `JobApplication`, `ApplicationState`, `WishlistState`, `AppliedState`.
+*   **Classes involved:** `ApplicationService`, `JobApplication`, `ApplicationState`, `WishlistState`, `AppliedState` (and all other concrete states).
 *   **Important methods:** `JobApplication.changeState()`, `ApplicationState.handleTransition()`.
-*   **Execution:** Moving a card triggers `ApplicationService.changeStage()`. The `JobApplication` context class delegates validation logic to its current `ApplicationState` via `handleTransition()`. If valid, the new state is assigned and persisted to the PostgreSQL database.
+*   **Execution:** Moving a card triggers `ApplicationService.changeStage()`. The `JobApplication` context class delegates validation logic to its current `ApplicationState` via `handleTransition()`. If valid, the new deterministic state is assigned and persisted to the PostgreSQL database.
 
 **F06 — Deadline Tracking & Notification Alerts**
 *   **Related Use Case:** UC-06 Track Deadlines and Receive Alerts
 *   **Related Sequence Diagram:** SD-06 Track Deadlines and Receive Alerts
 *   **Classes involved:** `DeadlineScheduler`, `DeadlineSubject`, `DashboardObserver`, `NotificationAlertObserver`.
 *   **Important methods:** `DeadlineSubject.checkDeadlines()`, `DeadlineObserver.onDeadlineEvent()`.
-*   **Execution:** The `DeadlineScheduler` periodically triggers `checkDeadlines()`. If the subject detects dates within a 48-hour threshold, it constructs a `DeadlineEvent` and pushes it via `notifyObservers()`. Registered UI observers receive the event and render alert banners immediately.
+*   **Execution:** The `DeadlineScheduler` periodically triggers `checkDeadlines()`. If the subject deterministically detects dates within a 48-hour threshold, it constructs a `DeadlineEvent` and pushes it via `notifyObservers()`. Registered UI observers receive the event and render alert banners immediately.
 
 **F07 — Interview Prep Sheet Generator**
 *   **Related Use Case:** UC-07 Generate Interview Prep Sheet
@@ -61,21 +61,21 @@
 *   **Related Sequence Diagram:** SD-09 View Job Search Analytics
 *   **Classes involved:** `AnalyticsController`, `MetricsService`.
 *   **Important methods:** `AnalyticsController.getDashboardMetrics()`, `MetricsService.countByStage()`, `MetricsService.calculateConversionRate()`.
-*   **Execution:** Navigating to the analytics view calls `getDashboardMetrics()`. The `MetricsService` executes optimized SQL queries against PostgreSQL to aggregate pipeline volumes and conversion rates, returning structured JSON data required to render GUI charts.
+*   **Execution:** Navigating to the analytics view calls `getDashboardMetrics()`. The `MetricsService` executes deterministic, optimized SQL queries against PostgreSQL to aggregate pipeline volumes and conversion rates, returning structured JSON data required to render GUI charts.
 
 **F10 — Application Package Exporter**
 *   **Related Use Case:** UC-10 Export Application Package
 *   **Related Sequence Diagram:** SD-10 Export Application Package
 *   **Classes involved:** `ExportController`, `DocumentGenerator`.
 *   **Important methods:** `ExportController.exportPackage()`, `DocumentGenerator.generatePDF()`.
-*   **Execution:** Selecting export triggers the `ExportController` to pull finalized resume and cover letter data. It hands this payload to `DocumentGenerator.generatePDF()`, which maps the text to standard layouts and streams the compiled file to the UI.
+*   **Execution:** Selecting export triggers the `ExportController` to pull finalized resume and cover letter data. It hands this payload to `DocumentGenerator.generatePDF()`, which maps the text to standard layouts and streams the compiled deterministic file to the UI.
 
 **F11 — Career Agent Assistant**
 *   **Related Use Case:** UC-11 Run Career Agent Assistant
 *   **Related Sequence Diagram:** SD-11 Run Career Agent Assistant
 *   **Classes involved:** `AgentController`, `Planner`, `ToolManager`, `Tool`, `AIEngineFacade`.
 *   **Important methods:** `AgentController.handleRequest()`, `Planner.createPlan()`, `ToolManager.executeTool()`.
-*   **Execution:** Submitting a natural language prompt invokes `handleRequest()`. The `Planner` utilizes the AI facade to generate a structured `Plan` containing executable steps. The controller iterates through each `PlanStep`, calling `ToolManager.executeTool()` to trigger specific backend capabilities (e.g., `MatchAnalysisTool`), accumulating the results for the user.
+*   **Execution:** Submitting a natural language prompt invokes `handleRequest()`. The `Planner` utilizes the AI facade to generate a structured `Plan`. The controller iterates through each `PlanStep`, deterministically calling `ToolManager.executeTool()` to trigger backend capabilities (e.g., `MatchAnalysisTool`), accumulating the results into a hybrid workflow for the user.
 
 **F12 — Mock Interview Practice**
 *   **Related Use Case:** UC-12 Practice Mock Interview
