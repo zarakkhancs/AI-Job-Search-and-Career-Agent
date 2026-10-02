@@ -37,7 +37,7 @@
 
 **6. Command Pattern**
 *   **Problem addressed:** Processing arbitrary text-based CLI inputs requires decoupling the user's terminal request from the backend execution logic, allowing for organized execution, logging, and history tracking.
-*   **Participating classes:** `CommandInvoker` (Invoker), `Command` (Interface), `GenerateCoverLetterCommand`, `RunAgentCommand`, `ImportResumeCommand` (Concrete Commands).
+*   **Participating classes:** `CommandInvoker` (Invoker), `Command` (Interface), and Concrete Commands covering all major system functionality: `ImportResumeCommand`, `ImportJobCommand`, `AnalyzeMatchCommand`, `GenerateCoverLetterCommand`, `RunAgentCommand`, `GeneratePrepSheetCommand`, `OptimizeBulletCommand`, `MovePipelineCommand`, `ViewAnalyticsCommand`, `ExportPackageCommand`, and `StartMockInterviewCommand`.
 *   **Class roles:** The CLI application parses arguments and creates a specific `Command` object encapsulating the request. The `CommandInvoker` triggers the `execute()` method, which delegates the work to the actual backend REST controllers (the Receivers).
 *   **Appropriateness:** It standardizes how distinct requests are encapsulated as objects, cleanly separating the invoker of the request from the object that performs the actual work.
 *   **Alternative difficulties:** The main CLI application loop would require massive, procedural routing functions (`if/else` blocks) directly invoking backend controller methods, breaking the separation of concerns.
