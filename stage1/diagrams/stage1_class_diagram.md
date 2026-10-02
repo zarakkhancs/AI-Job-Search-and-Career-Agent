@@ -63,6 +63,33 @@ classDiagram
         -message: String
         +execute(): CommandResult
     }
+    class GeneratePrepSheetCommand {
+        -applicationId: String
+        +execute(): CommandResult
+    }
+    class OptimizeBulletCommand {
+        -bulletId: String
+        -applicationId: String
+        +execute(): CommandResult
+    }
+    class MovePipelineCommand {
+        -applicationId: String
+        -newStage: String
+        +execute(): CommandResult
+    }
+    class ViewAnalyticsCommand {
+        -userId: String
+        +execute(): CommandResult
+    }
+    class ExportPackageCommand {
+        -applicationId: String
+        -format: String
+        +execute(): CommandResult
+    }
+    class StartMockInterviewCommand {
+        -applicationId: String
+        +execute(): CommandResult
+    }
     class CommandResult {
         -success: boolean
         -output: String
@@ -71,6 +98,7 @@ classDiagram
     class ResumeController {
         +uploadResume(file: File, userId: String): Resume
         +getResume(userId: String): Resume
+        +replaceBullet(bulletId: String, newText: String): Resume
     }
     class JobController {
         +importJob(source: InputSource, userId: String): JobApplication
@@ -79,6 +107,7 @@ classDiagram
     class ApplicationController {
         +changeStage(applicationId: String, newStage: String): JobApplication
         +setDeadline(applicationId: String, dueAt: DateTime): JobApplication
+        +getUnreadNotifications(userId: String): List~Notification~
     }
     class AIFeatureController {
         +analyzeMatch(applicationId: String): MatchResult
@@ -98,6 +127,7 @@ classDiagram
     class ApplicationService {
         +changeStage(applicationId: String, newStage: String): JobApplication
         +setDeadline(applicationId: String, dueAt: DateTime): JobApplication
+        +getUnreadNotifications(userId: String): List~Notification~
     }
     class MetricsService {
         +countByStage(userId: String): Map
@@ -139,17 +169,30 @@ classDiagram
     AnalyzeMatchCommand ..|> Command
     GenerateCoverLetterCommand ..|> Command
     RunAgentCommand ..|> Command
+    GeneratePrepSheetCommand ..|> Command
+    OptimizeBulletCommand ..|> Command
+    MovePipelineCommand ..|> Command
+    ViewAnalyticsCommand ..|> Command
+    ExportPackageCommand ..|> Command
+    StartMockInterviewCommand ..|> Command
     Command ..> CommandResult : «use»
     ImportResumeCommand --> "1" ResumeController : receiver
     ImportJobCommand --> "1" JobController : receiver
     AnalyzeMatchCommand --> "1" AIFeatureController : receiver
     GenerateCoverLetterCommand --> "1" AIFeatureController : receiver
     RunAgentCommand --> "1" AgentController : receiver
+    GeneratePrepSheetCommand --> "1" AIFeatureController : receiver
+    OptimizeBulletCommand --> "1" AIFeatureController : receiver
+    StartMockInterviewCommand --> "1" AIFeatureController : receiver
+    MovePipelineCommand --> "1" ApplicationController : receiver
+    ViewAnalyticsCommand --> "1" AnalyticsController : receiver
+    ExportPackageCommand --> "1" ExportController : receiver
 
     ResumeController --> "1" IngestionService
     JobController --> "1" IngestionService
     ApplicationController --> "1" ApplicationService
     ApplicationService --> "1" JobApplicationRepository
+    ApplicationService --> "1" NotificationRepository
     ApplicationService ..> JobApplication : «use»
     AIFeatureController --> "1" AIEngineFacade
     AIFeatureController --> "1" JobApplicationRepository
@@ -195,7 +238,9 @@ classDiagram
     class Plan {
         -goal: String
         -steps: List~PlanStep~
+        -clarificationQuestion: String
         +nextStep(): PlanStep
+        +needsClarification(): boolean
         +isComplete(): boolean
     }
     class PlanStep {
@@ -725,7 +770,7 @@ classDiagram
 | 3 | State | `JobApplication` | `ApplicationState` | `WishlistState`, `AppliedState`, `InterviewingState`, `OfferState`, `RejectedState` |
 | 4 | Facade | `AIEngineFacade` | (single entry point) | Hides the `PromptFactory` hierarchy, `LLMClient`, `JSONResponseParser`, `ResponseValidator` |
 | 5 | Observer | `DeadlineSubject` | `DeadlineObserver` | `DashboardObserver`, `NotificationAlertObserver` (triggered by `DeadlineScheduler`) |
-| 6 | Command | `CommandInvoker` | `Command` | `ImportResumeCommand`, `ImportJobCommand`, `AnalyzeMatchCommand`, `GenerateCoverLetterCommand`, `RunAgentCommand` (receivers are the controllers) |
+| 6 | Command | `CommandInvoker` | `Command` | `ImportResumeCommand`, `ImportJobCommand`, `AnalyzeMatchCommand`, `GenerateCoverLetterCommand`, `RunAgentCommand`, `GeneratePrepSheetCommand`, `OptimizeBulletCommand`, `MovePipelineCommand`, `ViewAnalyticsCommand`, `ExportPackageCommand`, `StartMockInterviewCommand` (receivers are the controllers) |
 | 7 | Adapter | `GeminiClient` (object adapter) | `LLMClient` (target) | Holds the external `GeminiRestAPI` (adaptee) |
 
 ## 2.1.2 Design Principles Demonstrated

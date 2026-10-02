@@ -112,7 +112,7 @@ The system features a modern web-based Graphical User Interface (GUI) built with
 *   **User Interaction:** The user types a natural-language request (e.g., "Prepare me for the Shopify role") in the GUI or CLI.
 *   **Input:** A natural-language string and optional job context.
 *   **Output:** Executed application artifacts (cover letters, prep sheets) and a summarized response.
-*   **AI Involvement:** AI-based. The LLM acts as a planner to break the request into actionable steps.
+*   **AI Involvement:** Hybrid. The LLM acts as a planner to break the request into actionable steps; deterministic code (`ResponseValidator`, `ToolManager`) validates and executes each step.
 *   **Expected Workflow:** The backend `Planner` translates the prompt into a sequence of tool calls. The `ToolManager` executes these calls (e.g., `MatchAnalysisTool`, `CoverLetterTool`) and returns the aggregated results.
 *   **Error/Alternative Cases:** If the request is ambiguous, the agent asks a clarifying question instead of executing a flawed plan.
 

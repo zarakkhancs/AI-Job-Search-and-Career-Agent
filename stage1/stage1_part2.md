@@ -9,13 +9,13 @@
 
 **2. Factory Method Pattern**
 *   **Problem addressed:** The system must generate complex, context-specific prompts for various AI features (cover letters, mock interviews, skill matching) without exposing the prompt construction logic to the standard controllers.
-*   **Participating classes:** `PromptFactory` (Creator), `LLMPrompt` (Product Interface), `CoverLetterPromptFactory`, `MatchPromptFactory`, `MockInterviewPromptFactory` (Concrete Creators), and `CoverLetterPrompt`, `MatchAnalysisPrompt` (Concrete Products).
+*   **Participating classes:** `PromptFactory` (Creator), `LLMPrompt` (Product Interface), `MatchPromptFactory`, `CoverLetterPromptFactory`, `PrepSheetPromptFactory`, `BulletPromptFactory`, `ResumeParsePromptFactory`, `PlanningPromptFactory`, `MockInterviewPromptFactory` (Concrete Creators), and `MatchAnalysisPrompt`, `CoverLetterPrompt`, `InterviewPrompt`, `BulletOptimizerPrompt`, `ResumeParsePrompt`, `PlanningPrompt`, `MockInterviewPrompt` (Concrete Products).
 *   **Class roles:** `PromptFactory` dictates the instantiation interface. The concrete factories handle injecting specific user and job data into the correct `LLMPrompt` object structure required by the external LLM.
 *   **Appropriateness:** It centralizes the creation of AI prompts, ensuring all payloads adhere to a strict template before network transmission.
 *   **Alternative difficulties:** Feature controllers or the Facade would be forced to manually concatenate messy strings of prompt instructions inline, leading to duplicated code, inconsistent AI outputs, and a brittle architecture.
 
 **3. State Pattern**
-*   **Problem addressed:** Job applications move through distinct phases (Wishlist, Applied, Interviewing, Offer). Certain actions and transitions are only valid in specific phases, requiring strict validation logic to prevent illegal lifecycle moves.
+*   **Problem addressed:** Job applications move through distinct phases (Wishlist, Applied, Interviewing, Offer, Rejected). Certain actions and transitions are only valid in specific phases, requiring strict validation logic to prevent illegal lifecycle moves.
 *   **Participating classes:** `ApplicationState` (State Interface), `WishlistState`, `AppliedState`, `InterviewingState`, `OfferState`, `RejectedState` (Concrete States), and `JobApplication` (Context).
 *   **Class roles:** `JobApplication` maintains a reference to its current `ApplicationState`. The concrete state classes encapsulate the specific behaviors and transition validation rules for their respective pipeline phase.
 *   **Appropriateness:** It encapsulates state-specific transition logic cleanly, moving rules into dedicated classes rather than bloating the main domain object.

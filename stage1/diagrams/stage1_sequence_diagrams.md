@@ -18,7 +18,7 @@ Every diagram uses the classes and methods defined in the class diagram (Section
 | SD-10 Export Application Package | F10 | UC-10 | none (deterministic) |
 | SD-11 Run Career Agent Assistant | F11 | UC-11 | Facade, Factory Method, Adapter |
 | SD-12 Practice Mock Interview | F12 | UC-12 | Facade, Factory Method, Adapter |
-| SD-13 Run a Feature from the CLI | all CLI features | UC-01, 02, 03, 04, 11 | Command |
+| SD-13 Run a Feature from the CLI | all CLI features | UC-01, 02, 03, 04, 05, 07, 08, 09, 10, 11, 12 | Command |
 
 ---
 
@@ -820,7 +820,7 @@ sequenceDiagram
 
 ## SD-13: Run a Feature from the CLI (Command pattern)
 
-The CLI reaches the same controllers as the GUI. Each CLI request becomes a `Command` object (receiver: a controller) that the `CommandInvoker` executes and records. The example is `GenerateCoverLetterCommand`; the other commands (`ImportResumeCommand`, `ImportJobCommand`, `AnalyzeMatchCommand`, `RunAgentCommand`) follow the same structure and differ only in their receiver.
+The CLI reaches the same controllers as the GUI. Each CLI request becomes a `Command` object (receiver: a controller) that the `CommandInvoker` executes and records. The example is `GenerateCoverLetterCommand`; the other ten commands (`ImportResumeCommand`, `ImportJobCommand`, `AnalyzeMatchCommand`, `RunAgentCommand`, `GeneratePrepSheetCommand`, `OptimizeBulletCommand`, `MovePipelineCommand`, `ViewAnalyticsCommand`, `ExportPackageCommand`, `StartMockInterviewCommand`) follow the same structure and differ only in their receiver controller.
 
 ```mermaid
 sequenceDiagram
