@@ -1,4 +1,4 @@
-# 1.3 Feature-to-Design Traceability
+# 3.1 Feature-to-Design Traceability
 
 | Feature | Description | Type | Related Use Case | Primary Classes | Key Methods | Design Pattern |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
