@@ -372,3 +372,6 @@ The diagram source is `use_case_diagram.drawio` (open it in draw.io to edit).
 | UC-01a | Parse PDF Text | `«include»` in UC-01 | `PDFResumeExtractor` reads the PDF and returns its raw text as an `ExtractionResult`. It fails with an extraction error when the PDF is unreadable. |
 | UC-02a | Enter Job Text Manually | `«extend»` UC-02 | When a job URL cannot be scraped, the Job Seeker pastes the job description and `PastedTextJobParser` processes it. |
 | UC-10a | Export Plain Text Copy | `«extend»` UC-10 | When PDF generation fails, `DocumentGenerator.generatePlainText()` produces a text version of the resume and cover letter. |
+| UC-11a | Analyze Skill Gap and Match | `«include»` in UC-11 | The Agent Planner automatically triggers UC-03 as a sub-routine via the `MatchAnalysisTool` to evaluate the user against a target job. |
+| UC-11b | Generate Cover Letter | `«include»` in UC-11 | The Agent Planner automatically triggers UC-04 as a sub-routine via the `CoverLetterTool` to draft application materials. |
+| UC-11c | Generate Interview Prep Sheet | `«include»` in UC-11 | The Agent Planner automatically triggers UC-07 as a sub-routine via the `PrepSheetTool` to compile interview questions. |
