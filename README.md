@@ -1,6 +1,6 @@
-# AI Job Search and Career Agent - EECS 3401 Stage 1
+# AI Job Search and Career Agent - EECS 33311 Stage 1
 
-Welcome to the Stage 1 Architecture and Design documentation for the AI Job Search and Career Agent. This system acts as an intelligent career counselor for software engineering students, built with a Next.js frontend, a Java/PostgreSQL backend, and powered by the Gemini 1.5 Flash LLM.
+Welcome to the Stage 1 Architecture and Design documentation for the AI Job Search and Career Agent. This system acts as an intelligent career counselor for software engineering students, built with a Next.js frontend, a Java/PostgreSQL backend, and powered by the Gemini 3.1 Pro LLM.
 
 ## Documentation Index
 
