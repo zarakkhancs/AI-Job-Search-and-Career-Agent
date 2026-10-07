@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1170</x><y>214</y><w>122</w><h>65</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m2=1..*
+r2=strategies</panel_attributes>
+    <additional_attributes>122;0;59;33;0;65</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1374</x><y>214</y><w>42</w><h>98</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=parses resume text</panel_attributes>
+    <additional_attributes>42;0;19;54;0;98</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1491</x><y>214</y><w>42</w><h>98</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;23;54;42;98</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1582</x><y>214</y><w>146</w><h>98</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;80;54;146;98</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>377</x><y>364</y><w>501</w><h>103</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;103;33;94;66;86;291;38;501;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>755</x><y>385</y><w>193</w><h>82</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;82;96;41;193;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1072</x><y>385</y><w>10</w><h>82</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;82;0;41;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1166</x><y>385</y><w>132</w><h>73</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use»</panel_attributes>
+    <additional_attributes>0;0;66;36;132;73</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1265</x><y>382</y><w>270</w><h>84</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«create»</panel_attributes>
+    <additional_attributes>0;0;150;40;238;68;254;75;270;84</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1708</x><y>127</y><w>32</w><h>10</h></coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>0;0;16;0;32;0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1199</x><y>40</y><w>509</w><h>174</h></coordinates>
+    <panel_attributes>IngestionService
+--
+-strategies: List&lt;ExtractionStrategy&gt;
+-facade: AIEngineFacade
+-resumeRepo: ResumeRepository
+-jobRepo: JobApplicationRepository
+--
++ingestResume(file: File, userId: String): Resume
++ingestJob(source: InputSource, userId: String): JobApplication
+-selectStrategy(source: InputSource): ExtractionStrategy</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>878</x><y>279</y><w>387</w><h>106</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ExtractionStrategy
+--
+--
++supports(source: InputSource): boolean
++extract(source: InputSource): ExtractionResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>40</x><y>467</y><w>387</w><h>89</h></coordinates>
+    <panel_attributes>PDFResumeExtractor
+--
+--
++supports(source: InputSource): boolean
++extract(source: InputSource): ExtractionResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>459</x><y>467</y><w>387</w><h>89</h></coordinates>
+    <panel_attributes>WebJobScraper
+--
+--
++supports(source: InputSource): boolean
++extract(source: InputSource): ExtractionResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>878</x><y>467</y><w>387</w><h>89</h></coordinates>
+    <panel_attributes>PastedTextJobParser
+--
+--
++supports(source: InputSource): boolean
++extract(source: InputSource): ExtractionResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1298</x><y>450</y><w>190</w><h>123</h></coordinates>
+    <panel_attributes>InputSource
+--
+-type: String
+-fileBytes: ByteArray
+-url: String
+-text: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1520</x><y>467</y><w>152</w><h>89</h></coordinates>
+    <panel_attributes>ExtractionResult
+--
+-rawText: String
+-fields: Map
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1297</x><y>312</y><w>136</w><h>40</h></coordinates>
+    <panel_attributes>AIEngineFacade</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1466</x><y>312</y><w>152</w><h>40</h></coordinates>
+    <panel_attributes>ResumeRepository</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1649</x><y>312</y><w>212</w><h>40</h></coordinates>
+    <panel_attributes>JobApplicationRepository</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>1741</x><y>84</y><w>298</w><h>86</h></coordinates>
+    <panel_attributes>Strategy pattern: Context.
+selectStrategy() picks the first
+strategy whose supports() returns true
+for the input.</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

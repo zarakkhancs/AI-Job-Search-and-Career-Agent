@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates><x>700</x><y>20</y><w>850</w><h>1270</h></coordinates>
+    <panel_attributes>AI Job Search and Career Agent
+bg=#eef4fb</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>170</y><w>737</w><h>386</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;386;737;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>289</y><w>720</w><h>272</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;272;720;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>385</y><w>697</w><h>179</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;179;697;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>477</y><w>667</w><h>89</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;89;667;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>578</y><w>712</w><h>234</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;712;234</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>581</y><w>729</w><h>329</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;729;329</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>545</y><w>647</w><h>24</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;24;647;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>572</y><w>655</w><h>56</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;655;56</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>585</y><w>743</w><h>444</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;743;444</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>590</y><w>755</w><h>598</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;755;598</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>571</y><w>1086</w><h>26</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;1086;26</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>576</y><w>692</w><h>160</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;692;160</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1058</x><y>157</y><w>667</w><h>89</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>667;89;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1058</x><y>253</y><w>667</w><h>89</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>667;0;0;89</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1028</x><y>256</y><w>697</w><h>179</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>697;0;0;179</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1009</x><y>259</y><w>716</w><h>253</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>716;0;0;253</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>993</x><y>262</y><w>732</w><h>348</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>732;0;0;348</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1405</x><y>273</y><w>320</w><h>295</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>320;0;0;295</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>980</x><y>266</y><w>745</w><h>463</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>745;0;0;463</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>262</y><w>645</w><h>10</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;8;645;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>135</x><y>872</y><w>655</w><h>56</h></coordinates>
+    <panel_attributes>lt=-</panel_attributes>
+    <additional_attributes>0;0;655;56</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1079</x><y>133</y><w>142</w><h>10</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«include»</panel_attributes>
+    <additional_attributes>0;3;142;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>986</x><y>391</y><w>328</w><h>179</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«include»</panel_attributes>
+    <additional_attributes>328;179;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1015</x><y>487</y><w>269</w><h>86</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«include»</panel_attributes>
+    <additional_attributes>269;86;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1057</x><y>557</y><w>185</w><h>25</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«include»</panel_attributes>
+    <additional_attributes>185;25;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1080</x><y>260</y><w>140</w><h>10</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«extend»</panel_attributes>
+    <additional_attributes>140;0;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>995</x><y>1050</y><w>309</w><h>141</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«extend»</panel_attributes>
+    <additional_attributes>309;0;0;141</additional_attributes>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>107</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-01: Import Resume</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>227</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-02: Import Job Posting</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>327</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-03: Analyze Skill Gap and Match</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>427</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-04: Generate Cover Letter</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>507</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-07: Generate Interview Prep Sheet</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>607</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-08: Optimize Resume Bullet Point</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>727</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-12: Practice Mock Interview</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>807</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-05: Manage Application Pipeline</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>907</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-06: Track Deadlines and Receive Alerts</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>1027</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-09: View Job Search Analytics</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>780</x><y>1187</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-10: Export Application Package</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>1220</x><y>97</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>Parse PDF Text
+bg=#fff7e0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>1220</x><y>227</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>Enter Job Text Manually
+bg=#fff7e0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>1220</x><y>987</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>Export Plain Text Copy
+bg=#fff7e0</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLUseCase</id>
+    <coordinates><x>1220</x><y>567</y><w>300</w><h>66</h></coordinates>
+    <panel_attributes>UC-11: Run Career Agent Assistant</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates><x>45</x><y>530</y><w>130</w><h>110</h></coordinates>
+    <panel_attributes>Job Seeker</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates><x>45</x><y>230</y><w>130</w><h>110</h></coordinates>
+    <panel_attributes>Job Board Website
+&lt;&lt;external system&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates><x>45</x><y>830</y><w>130</w><h>110</h></coordinates>
+    <panel_attributes>Deadline Scheduler
+&lt;&lt;system&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLActor</id>
+    <coordinates><x>1685</x><y>210</y><w>130</w><h>110</h></coordinates>
+    <panel_attributes>Gemini AI API
+&lt;&lt;external AI service&gt;&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

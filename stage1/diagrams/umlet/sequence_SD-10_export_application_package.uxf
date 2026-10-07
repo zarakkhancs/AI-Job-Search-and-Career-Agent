@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates><x>20</x><y>20</y><w>960</w><h>638</h></coordinates>
+    <panel_attributes>title:SD-10: Export Application Package
+obj=Job Seeker~Seeker
+obj=KanbanDashboardUI~UI
+obj=ExportController~EC
+obj=JobApplicationRepository~JR
+obj=ResumeRepository~RR
+obj=DocumentGenerator~DG
+
+Seeker-&gt;UI : click "Export Application Package"
+UI-&gt;EC : exportPackage(applicationId, "pdf")
+EC-&gt;JR : findById(applicationId)
+JR.&gt;EC : JobApplication (with CoverLetters)
+EC-&gt;RR : findByUser(userId)
+RR.&gt;EC : Resume
+iframe{:break [no cover letter exists (3a)]
+EC.&gt;UI : error
+UI.&gt;Seeker : prompt to generate a cover letter first (UC-04)
+iframe}
+EC-&gt;DG : generatePDF(resume, latest CoverLetter)
+iframe{:alt [PDF generation succeeds]
+DG.&gt;EC : ExportFile (pdf)
+EC.&gt;UI : ExportFile
+UI.&gt;Seeker : download starts
+--[PDF generation fails (4a, Export Plain Text Copy)]
+DG.&gt;EC : DocumentGenerationException
+EC-&gt;DG : generatePlainText(resume, latest CoverLetter)
+DG.&gt;EC : ExportFile (text)
+EC.&gt;UI : ExportFile and fallback notice
+UI.&gt;Seeker : text copy downloads with an explanation
+iframe}</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

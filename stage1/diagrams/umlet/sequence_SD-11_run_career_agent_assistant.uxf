@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates><x>20</x><y>20</y><w>2310</w><h>1814</h></coordinates>
+    <panel_attributes>title:SD-11: Run Career Agent Assistant
+obj=Job Seeker~Seeker
+obj=KanbanDashboardUI~UI
+obj=AgentController~AC
+obj=MemoryManager~MM
+obj=MemoryRepository~MR
+obj=Planner~PL
+obj=ToolManager~TM
+obj=AIEngineFacade~AF
+obj=PlanningPromptFactory~PPF
+obj=GeminiClient~GC
+obj=Gemini API~G
+obj=ResponseValidator~RV
+obj=JSONResponseParser~JP
+obj=Plan~PN
+obj=Tool (e.g. MatchAnalysisTool)~T
+
+Seeker-&gt;UI : "Get me ready for the Shopify job"
+UI-&gt;AC : handleRequest(userId, message)
+AC-&gt;MM : recall(userId, message)
+MM-&gt;MR : findByUser(userId)
+MR.&gt;MM : List[MemoryEntry]
+MM.&gt;AC : relevant MemoryEntries
+AC-&gt;PL : createPlan(message, context)
+PL-&gt;TM : getAvailableTools()
+TM.&gt;PL : List[ToolInfo]
+PL-&gt;AF : planSteps(request, tools)
+AF-&gt;PPF : createPrompt(context)
+PPF.&gt;AF : PlanningPrompt
+AF-&gt;GC : generate(prompt)
+GC-&gt;G : generateContent(jsonBody)
+G.&gt;GC : JSON plan
+GC.&gt;AF : LLMResponse
+AF-&gt;RV : validateLLMOutput(rawText, planSchema)
+RV.&gt;AF : ValidationResult
+iframe{:opt [plan is invalid (4a)]
+PL-&gt;AF : planSteps(request, tools) replan once
+AF.&gt;PL : second attempt
+iframe{:break [still invalid]
+PL.&gt;AC : planning failed
+AC.&gt;UI : AgentResponse (could not plan this request)
+UI.&gt;Seeker : explanation
+iframe}
+iframe}
+AF-&gt;JP : parsePlan(json)
+JP.&gt;AF : Plan
+AF.&gt;PL : Plan
+PL.&gt;AC : Plan
+AC-&gt;PN : needsClarification()
+iframe{:break [request is ambiguous, no job can be identified (2a)]
+AC.&gt;UI : AgentResponse (clarifying question)
+UI.&gt;Seeker : asks which job
+iframe}
+AC-&gt;AC : executePlan(plan)
+iframe{:loop [until plan.isComplete()]
+AC-&gt;PN : nextStep()
+PN.&gt;AC : PlanStep(toolName, arguments)
+AC-&gt;RV : validateToolArgs(tool, args)
+RV.&gt;AC : ValidationResult
+iframe{:opt [arguments fail validation (5a)]
+AC-&gt;PL : replan(plan, step)
+PL.&gt;AC : revised Plan
+iframe{:break [arguments still invalid]
+AC.&gt;UI : AgentResponse (asks for the missing information)
+UI.&gt;Seeker : asks for missing details
+iframe}
+iframe}
+AC-&gt;TM : executeTool(name, args)
+TM-&gt;T : execute(args)
+iframe{:Note (T,G) the tool calls AIEngineFacade and follows SD-03, SD-04 or SD-07
+iframe}
+T.&gt;TM : ToolResult
+TM.&gt;AC : ToolResult
+iframe{:opt [ToolResult.success is false (5b)]
+AC-&gt;PL : replan(plan, failedStep)
+PL.&gt;AC : revised Plan
+iframe{:break [agent cannot recover]
+AC-&gt;MM : saveInteraction(userId, entry)
+AC.&gt;UI : AgentResponse (completed steps, failed steps, no invented results)
+UI.&gt;Seeker : report of what was done and what failed
+iframe}
+iframe}
+AC-&gt;AC : store ToolResult in PlanStep
+iframe}
+AC-&gt;MM : saveInteraction(userId, entry)
+MM-&gt;MR : save(userId, entry)
+AC.&gt;UI : AgentResponse (summary of results)
+UI.&gt;Seeker : display summary</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

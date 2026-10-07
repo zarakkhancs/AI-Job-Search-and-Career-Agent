@@ -1,0 +1,711 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2187</x><y>693</y><w>151</w><h>90</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>151;0;73;47;0;90</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2544</x><y>693</y><w>51</w><h>99</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>0;0;27;52;51;99</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1563</x><y>689</y><w>692</w><h>94</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>692;0;685;2;677;4;396;41;113;69;56;81;0;94</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1074</x><y>689</y><w>1181</w><h>71</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>1181;0;1173;2;1166;4;593;48;16;69;8;70;0;71</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2734</x><y>689</y><w>856</w><h>111</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>0;0;8;2;16;4;363;38;711;69;786;88;856;111</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2734</x><y>687</y><w>328</w><h>113</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>0;0;8;3;16;6;180;63;328;113</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1780</x><y>689</y><w>476</w><h>128</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» REST</panel_attributes>
+    <additional_attributes>476;0;468;2;460;4;262;26;72;69;31;97;0;128</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1544</x><y>129</y><w>10</w><h>65</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;0;32;0;65</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1544</x><y>283</y><w>10</w><h>65</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m2=0..*
+r2=history</panel_attributes>
+    <additional_attributes>0;0;0;32;0;65</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1654</x><y>423</y><w>411</w><h>130</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>411;130;374;102;333;79;196;38;54;14;27;7;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1654</x><y>396</y><w>1176</w><h>157</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>1176;157;1139;129;1096;106;570;27;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>700</x><y>402</y><w>733</w><h>150</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;150;37;122;80;100;382;38;733;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1228</x><y>435</y><w>206</w><h>110</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;110;32;88;64;67;135;31;206;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1571</x><y>437</y><w>72</w><h>116</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>72;116;36;58;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>195</x><y>395</y><w>1239</w><h>158</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;158;38;129;81;107;638;25;1239;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>964</x><y>403</y><w>469</w><h>141</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;141;32;118;68;99;277;32;469;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1450</x><y>437</y><w>67</w><h>107</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;107;34;53;67;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1654</x><y>396</y><w>1789</w><h>157</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>1789;157;1710;128;1626;106;820;32;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1654</x><y>395</y><w>1432</w><h>150</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>1432;150;1391;126;1348;107;691;25;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>448</x><y>398</y><w>986</w><h>155</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;155;38;127;80;104;509;32;986;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1654</x><y>431</y><w>200</w><h>122</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use»</panel_attributes>
+    <additional_attributes>0;0;72;31;142;71;173;96;200;122</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2103</x><y>642</y><w>10</w><h>141</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>8;0;4;70;0;141</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2666</x><y>642</y><w>163</w><h>149</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>163;0;81;75;0;149</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>673</x><y>642</y><w>49</w><h>116</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>0;0;24;56;49;116</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>916</x><y>651</y><w>178</w><h>107</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>178;0;147;22;116;42;59;76;0;107</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1687</x><y>642</y><w>69</w><h>174</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>0;0;37;92;69;174</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>200</x><y>642</y><w>236</w><h>116</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>0;0;36;27;76;51;155;86;236;116</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>804</x><y>651</y><w>68</w><h>107</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>68;0;35;52;0;107</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>458</x><y>642</y><w>169</w><h>116</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>0;0;34;26;70;51;119;84;169;116</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1391</x><y>651</y><w>20</w><h>133</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>20;0;10;66;0;133</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3569</x><y>642</y><w>92</w><h>158</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>0;0;47;80;92;158</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3157</x><y>651</y><w>10</w><h>150</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=receiver</panel_attributes>
+    <additional_attributes>0;0;4;77;8;150</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2142</x><y>890</y><w>99</w><h>123</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;53;66;99;123</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2292</x><y>881</y><w>245</w><h>132</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>245;0;115;70;0;132</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1422</x><y>890</y><w>67</w><h>90</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;33;45;67;90</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1744</x><y>1086</y><w>443</w><h>106</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;238;57;443;106</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1556</x><y>1086</y><w>59</w><h>106</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;32;57;59;106</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1438</x><y>1086</y><w>60</w><h>106</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use»</panel_attributes>
+    <additional_attributes>60;0;28;57;0;106</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>676</x><y>915</y><w>44</w><h>97</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>44;0;20;54;0;97</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1074</x><y>912</y><w>1165</w><h>280</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;8;1;16;3;384;20;746;68;994;175;1165;280</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>790</x><y>915</y><w>44</w><h>97</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;24;54;44;97</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3675</x><y>873</y><w>10</w><h>107</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>4;0;2;52;0;107</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2373</x><y>1082</y><w>1102</w><h>123</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>1102;0;1091;2;1080;4;470;83;0;123</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3673</x><y>1086</y><w>10</w><h>65</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«create»</panel_attributes>
+    <additional_attributes>0;0;0;32;0;65</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3673</x><y>1274</y><w>10</w><h>65</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;0;33;0;65</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3167</x><y>873</y><w>10</w><h>115</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;0;57;0;115</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2313</x><y>873</y><w>770</w><h>320</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>770;0;369;167;0;320</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3167</x><y>1078</y><w>10</w><h>81</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«create»</panel_attributes>
+    <additional_attributes>0;0;0;40;0;81</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1632</x><y>128</y><w>134</w><h>66</h></coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>0;66;67;33;134;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2181</x><y>119</y><w>252</w><h>383</h></coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>252;383;116;177;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2256</x><y>502</y><w>478</w><h>191</h></coordinates>
+    <panel_attributes>&lt;&lt;frontend&gt;&gt;
+KanbanDashboardUI
+--
+--
++uploadResume(file: File)
++importJob(source: String)
++requestFeature(applicationId: String, featureType: String)
++moveCard(applicationId: String, newStage: String)
++setDeadline(applicationId: String, dueAt: DateTime)
++sendAgentRequest(message: String)
++updateDashboard(alertMessage: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1396</x><y>40</y><w>296</w><h>89</h></coordinates>
+    <panel_attributes>CLIApp
+--
+--
++main(args: List&lt;String&gt;)
+-parse(args: List&lt;String&gt;): Command</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1373</x><y>194</y><w>342</w><h>89</h></coordinates>
+    <panel_attributes>CommandInvoker
+--
+-history: List&lt;Command&gt;
+--
++execute(command: Command): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1434</x><y>348</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Command
+--
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2004</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>ImportResumeCommand
+--
+-filePath: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2766</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>ImportJobCommand
+--
+-urlOrText: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>544</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>AnalyzeMatchCommand
+--
+-applicationId: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1048</x><y>544</y><w>228</w><h>106</h></coordinates>
+    <panel_attributes>GenerateCoverLetterCommand
+--
+-applicationId: String
+-tone: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1560</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>RunAgentCommand
+--
+-message: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>40</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>GeneratePrepSheetCommand
+--
+-applicationId: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>796</x><y>544</y><w>220</w><h>106</h></coordinates>
+    <panel_attributes>OptimizeBulletCommand
+--
+-bulletId: String
+-applicationId: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1308</x><y>544</y><w>220</w><h>106</h></coordinates>
+    <panel_attributes>MovePipelineCommand
+--
+-applicationId: String
+-newStage: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3434</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>ViewAnalyticsCommand
+--
+-userId: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3044</x><y>544</y><w>220</w><h>106</h></coordinates>
+    <panel_attributes>ExportPackageCommand
+--
+-applicationId: String
+-format: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>292</x><y>553</y><w>220</w><h>89</h></coordinates>
+    <panel_attributes>StartMockInterviewCommand
+--
+-applicationId: String
+--
++execute(): CommandResult</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1812</x><y>553</y><w>159</w><h>89</h></coordinates>
+    <panel_attributes>CommandResult
+--
+-success: boolean
+-output: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1868</x><y>784</y><w>463</w><h>106</h></coordinates>
+    <panel_attributes>ResumeController
+--
+--
++uploadResume(file: File, userId: String): Resume
++getResume(userId: String): Resume
++replaceBullet(bulletId: String, newText: String): Resume</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2364</x><y>792</y><w>509</w><h>89</h></coordinates>
+    <panel_attributes>JobController
+--
+--
++importJob(source: InputSource, userId: String): JobApplication
++listBoard(userId: String): List&lt;JobApplication&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1106</x><y>784</y><w>554</w><h>106</h></coordinates>
+    <panel_attributes>ApplicationController
+--
+--
++changeStage(applicationId: String, newStage: String): JobApplication
++setDeadline(applicationId: String, dueAt: DateTime): JobApplication
++getUnreadNotifications(userId: String): List&lt;Notification&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>436</x><y>758</y><w>638</w><h>157</h></coordinates>
+    <panel_attributes>AIFeatureController
+--
+--
++analyzeMatch(applicationId: String): MatchResult
++generateCoverLetter(applicationId: String, tone: String): CoverLetter
++generatePrepSheet(applicationId: String): PrepSheet
++optimizeBullet(bulletId: String, applicationId: String): List&lt;BulletSuggestion&gt;
++startMockInterview(applicationId: String): MockInterviewSession
++submitAnswer(sessionId: String, answer: String): AnswerFeedback</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3461</x><y>800</y><w>440</w><h>72</h></coordinates>
+    <panel_attributes>AnalyticsController
+--
+--
++getDashboardMetrics(userId: String): DashboardMetrics</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2905</x><y>800</y><w>524</w><h>72</h></coordinates>
+    <panel_attributes>ExportController
+--
+--
++exportPackage(applicationId: String, format: String): ExportFile</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1250</x><y>980</y><w>554</w><h>106</h></coordinates>
+    <panel_attributes>ApplicationService
+--
+--
++changeStage(applicationId: String, newStage: String): JobApplication
++setDeadline(applicationId: String, dueAt: DateTime): JobApplication
++getUnreadNotifications(userId: String): List&lt;Notification&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3476</x><y>980</y><w>395</w><h>106</h></coordinates>
+    <panel_attributes>MetricsService
+--
+--
++countByStage(userId: String): Map
++calculateConversionRate(userId: String): double
++volumeOverTime(userId: String): List&lt;DataPoint&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2897</x><y>988</y><w>539</w><h>89</h></coordinates>
+    <panel_attributes>DocumentGenerator
+--
+--
++generatePDF(resume: Resume, letter: CoverLetter): ExportFile
++generatePlainText(resume: Resume, letter: CoverLetter): ExportFile</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3567</x><y>1151</y><w>212</w><h>123</h></coordinates>
+    <panel_attributes>DashboardMetrics
+--
+-totalApplications: int
+-countByStage: Map
+-conversionRates: Map
+-volume: List&lt;DataPoint&gt;
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3605</x><y>1339</y><w>136</w><h>89</h></coordinates>
+    <panel_attributes>DataPoint
+--
+-label: String
+-value: int
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3080</x><y>1160</y><w>174</w><h>106</h></coordinates>
+    <panel_attributes>ExportFile
+--
+-fileName: String
+-mimeType: String
+-content: ByteArray
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1692</x><y>816</y><w>144</w><h>40</h></coordinates>
+    <panel_attributes>AgentController</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2180</x><y>1013</y><w>152</w><h>40</h></coordinates>
+    <panel_attributes>IngestionService</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2161</x><y>1192</y><w>212</w><h>40</h></coordinates>
+    <panel_attributes>JobApplicationRepository</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1527</x><y>1192</y><w>197</w><h>40</h></coordinates>
+    <panel_attributes>NotificationRepository</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1359</x><y>1192</y><w>136</w><h>40</h></coordinates>
+    <panel_attributes>JobApplication</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>599</x><y>1013</y><w>136</w><h>40</h></coordinates>
+    <panel_attributes>AIEngineFacade</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>767</x><y>1013</y><w>152</w><h>40</h></coordinates>
+    <panel_attributes>ResumeRepository</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>1724</x><y>42</y><w>254</w><h>86</h></coordinates>
+    <panel_attributes>Command pattern: Invoker. Each
+concrete command wraps one CLI
+request; the controllers are the
+receivers.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>2010</x><y>50</y><w>298</w><h>69</h></coordinates>
+    <panel_attributes>Next.js/React boundary class. It talks
+to the Java backend only through REST
+calls.</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

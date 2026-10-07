@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates><x>20</x><y>20</y><w>1860</w><h>1190</h></coordinates>
+    <panel_attributes>title:SD-01: Import Resume
+obj=Job Seeker~Seeker
+obj=KanbanDashboardUI~UI
+obj=ResumeController~RC
+obj=IngestionService~IS
+obj=PDFResumeExtractor~PDF
+obj=AIEngineFacade~AF
+obj=ResumeParsePromptFactory~RPF
+obj=GeminiClient~GC
+obj=Gemini API~G
+obj=ResponseValidator~RV
+obj=JSONResponseParser~JP
+obj=ResumeRepository~RR
+
+Seeker-&gt;UI : select PDF and click "Upload Resume"
+UI-&gt;RC : uploadResume(file, userId)
+RC-&gt;IS : ingestResume(file, userId)
+IS-&gt;IS : selectStrategy(source)
+IS-&gt;PDF : supports(source)
+PDF.&gt;IS : true or false
+iframe{:break [no strategy supports the file type (3a)]
+IS.&gt;RC : UnsupportedInputException
+RC.&gt;UI : error
+UI.&gt;Seeker : "Invalid File Type - Please upload a PDF"
+iframe}
+IS-&gt;PDF : extract(source)
+iframe{:break [PDF unreadable or text extraction fails (4a)]
+PDF.&gt;IS : ExtractionException
+IS.&gt;RC : ExtractionException
+RC.&gt;UI : error
+UI.&gt;Seeker : ask for another file or manual entry
+iframe}
+PDF.&gt;IS : ExtractionResult(rawText)
+IS-&gt;AF : parseResume(rawText)
+AF-&gt;RPF : createPrompt(context)
+RPF.&gt;AF : ResumeParsePrompt
+AF-&gt;GC : generate(prompt)
+GC-&gt;G : generateContent(jsonBody)
+iframe{:break [Gemini times out, fails or returns malformed data (5a)]
+G.&gt;GC : error, timeout or invalid JSON
+GC.&gt;AF : LLMException
+AF.&gt;IS : AIServiceException (logged)
+IS-&gt;RR : save(Resume with rawText only)
+IS.&gt;RC : parsing failed, raw text kept
+RC.&gt;UI : error
+UI.&gt;Seeker : "Structured parsing failed - retry"
+iframe}
+G.&gt;GC : structured JSON text
+GC.&gt;AF : LLMResponse
+AF-&gt;RV : validateLLMOutput(rawText, schema)
+RV.&gt;AF : ValidationResult(valid)
+AF-&gt;JP : parseResume(json)
+JP.&gt;AF : Resume
+AF.&gt;IS : Resume
+IS-&gt;RR : save(resume)
+RR.&gt;IS : saved
+IS.&gt;RC : Resume
+RC.&gt;UI : Resume
+UI.&gt;Seeker : display parsed profile for review</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

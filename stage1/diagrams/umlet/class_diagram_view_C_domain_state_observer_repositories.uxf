@@ -1,0 +1,578 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>545</x><y>122</y><w>409</w><h>125</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=0..1</panel_attributes>
+    <additional_attributes>409;0;211;61;0;125</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1137</x><y>116</y><w>568</w><h>139</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m1=1
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;276;68;568;139</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>173</x><y>360</y><w>140</w><h>107</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>140;0;92;36;43;73;21;90;0;107</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>335</x><y>360</y><w>42</w><h>90</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>42;0;21;46;0;90</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>440</x><y>360</y><w>46</w><h>99</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;23;50;46;99</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>191</x><y>573</y><w>72</w><h>99</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>72;0;35;51;0;99</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1212</x><y>307</y><w>493</w><h>134</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m1=0..*
+m2=1</panel_attributes>
+    <additional_attributes>493;0;265;44;16;126;8;130;0;134</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1838</x><y>368</y><w>10</w><h>82</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1</panel_attributes>
+    <additional_attributes>0;0;0;41;0;82</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1924</x><y>368</y><w>91</w><h>82</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;46;41;91;82</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1971</x><y>343</y><w>323</w><h>128</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..1</panel_attributes>
+    <additional_attributes>0;0;165;65;323;128</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1970</x><y>319</y><w>664</w><h>142</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;249;53;536;114;599;128;664;142</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2461</x><y>556</y><w>182</w><h>116</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;91;58;182;116</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>2876</x><y>573</y><w>24</w><h>82</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>0;0;12;41;24;82</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1581</x><y>368</y><w>124</w><h>73</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=currentState</panel_attributes>
+    <additional_attributes>124;0;62;37;0;73</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>616</x><y>582</y><w>645</w><h>99</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;99;55;85;111;73;362;44;611;8;628;4;645;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1050</x><y>582</y><w>244</w><h>99</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;99;116;52;244;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1440</x><y>582</y><w>14</w><h>99</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;99;6;52;14;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1614</x><y>582</y><w>216</w><h>99</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>216;99;113;52;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1666</x><y>582</y><w>587</w><h>99</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>587;99;532;85;477;73;255;43;33;8;17;4;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3620</x><y>146</y><w>10</w><h>65</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1
+r2=triggers</panel_attributes>
+    <additional_attributes>0;0;0;32;0;65</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3387</x><y>368</y><w>130</w><h>99</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;&lt;-
+m2=0..*</panel_attributes>
+    <additional_attributes>130;0;63;51;0;99</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3740</x><y>368</y><w>114</w><h>73</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;58;37;114;73</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3620</x><y>368</y><w>10</w><h>82</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«create»</panel_attributes>
+    <additional_attributes>0;0;0;41;0;82</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3280</x><y>556</y><w>37</w><h>124</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>0;124;18;63;37;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3392</x><y>556</y><w>178</w><h>124</h></coordinates>
+    <panel_attributes>lt=.&gt;&gt;</panel_attributes>
+    <additional_attributes>178;124;91;63;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3670</x><y>753</y><w>137</w><h>99</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=1</panel_attributes>
+    <additional_attributes>0;0;67;48;137;99</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3574</x><y>753</y><w>33</w><h>90</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«create»</panel_attributes>
+    <additional_attributes>33;0;17;43;0;90</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3270</x><y>753</y><w>10</w><h>131</h></coordinates>
+    <panel_attributes>lt=.&gt;
+«use» push alert via SSE</panel_attributes>
+    <additional_attributes>0;0;0;69;0;131</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1904</x><y>136</y><w>63</w><h>74</h></coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>0;74;33;36;63;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>3730</x><y>136</y><w>106</w><h>75</h></coordinates>
+    <panel_attributes>lt=..</panel_attributes>
+    <additional_attributes>0;75;55;36;106;0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>954</x><y>40</y><w>182</w><h>106</h></coordinates>
+    <panel_attributes>User
+--
+-userId: String
+-email: String
+-displayName: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>272</x><y>220</y><w>273</w><h>140</h></coordinates>
+    <panel_attributes>Resume
+--
+-resumeId: String
+-rawText: String
+-uploadedAt: DateTime
+--
++getSkills(): List&lt;Skill&gt;
++getBullets(): List&lt;BulletPoint&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>40</x><y>467</y><w>159</w><h>89</h></coordinates>
+    <panel_attributes>Skill
+--
+-name: String
+-category: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>232</x><y>450</y><w>152</w><h>123</h></coordinates>
+    <panel_attributes>Experience
+--
+-company: String
+-title: String
+-startDate: Date
+-endDate: Date
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>80</x><y>672</y><w>159</w><h>89</h></coordinates>
+    <panel_attributes>BulletPoint
+--
+-bulletId: String
+-text: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>416</x><y>458</y><w>190</w><h>106</h></coordinates>
+    <panel_attributes>Education
+--
+-institution: String
+-degree: String
+-graduationDate: Date
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1022</x><y>433</y><w>190</w><h>157</h></coordinates>
+    <panel_attributes>JobPosting
+--
+-jobId: String
+-title: String
+-company: String
+-description: String
+-sourceUrl: String
+--
++getDetails(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1705</x><y>211</y><w>266</w><h>157</h></coordinates>
+    <panel_attributes>JobApplication
+--
+-applicationId: String
+-deadline: DateTime
+-currentState: ApplicationState
+--
++changeState(target: String)
++setDeadline(dueAt: DateTime)
++getStageName(): String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1243</x><y>442</y><w>440</w><h>140</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ApplicationState
+--
+--
++handleTransition(app: JobApplication, target: String)
++getStageName(): String
++allowedTransitions(): List&lt;String&gt;
++canScheduleInterview(): boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>271</x><y>680</y><w>440</w><h>72</h></coordinates>
+    <panel_attributes>WishlistState
+--
+--
++handleTransition(app: JobApplication, target: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>743</x><y>680</y><w>440</w><h>72</h></coordinates>
+    <panel_attributes>AppliedState
+--
+--
++handleTransition(app: JobApplication, target: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1215</x><y>680</y><w>440</w><h>72</h></coordinates>
+    <panel_attributes>InterviewingState
+--
+--
++handleTransition(app: JobApplication, target: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1687</x><y>680</y><w>440</w><h>72</h></coordinates>
+    <panel_attributes>OfferState
+--
+--
++handleTransition(app: JobApplication, target: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2159</x><y>680</y><w>440</w><h>72</h></coordinates>
+    <panel_attributes>RejectedState
+--
+--
++handleTransition(app: JobApplication, target: String)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1716</x><y>450</y><w>243</w><h>123</h></coordinates>
+    <panel_attributes>MatchResult
+--
+-score: int
+-matchedSkills: List&lt;String&gt;
+-missingSkills: List&lt;String&gt;
+-summary: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1992</x><y>450</y><w>182</w><h>123</h></coordinates>
+    <panel_attributes>CoverLetter
+--
+-letterId: String
+-text: String
+-tone: String
+-createdAt: DateTime
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2294</x><y>467</y><w>197</w><h>89</h></coordinates>
+    <panel_attributes>PrepSheet
+--
+-usedFallback: boolean
+-createdAt: DateTime
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2632</x><y>672</y><w>159</w><h>89</h></coordinates>
+    <panel_attributes>InterviewQuestion
+--
+-text: String
+-category: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2669</x><y>40</y><w>197</w><h>106</h></coordinates>
+    <panel_attributes>BulletSuggestion
+--
+-originalText: String
+-suggestedText: String
+-rationale: String
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2634</x><y>450</y><w>448</w><h>123</h></coordinates>
+    <panel_attributes>MockInterviewSession
+--
+-sessionId: String
+-status: String
+--
++nextQuestion(): InterviewQuestion
++recordAnswer(answer: String, feedback: AnswerFeedback)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>2824</x><y>655</y><w>190</w><h>123</h></coordinates>
+    <panel_attributes>AnswerFeedback
+--
+-questionText: String
+-userAnswer: String
+-feedbackText: String
+-score: int
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3449</x><y>843</y><w>205</w><h>123</h></coordinates>
+    <panel_attributes>Notification
+--
+-notificationId: String
+-message: String
+-isRead: boolean
+-createdAt: DateTime
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3525</x><y>40</y><w>190</w><h>106</h></coordinates>
+    <panel_attributes>DeadlineScheduler
+--
+-intervalMinutes: int
+--
++start()
++runCheck()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3434</x><y>211</y><w>372</w><h>157</h></coordinates>
+    <panel_attributes>DeadlineSubject
+--
+-observers: List&lt;DeadlineObserver&gt;
+-thresholdHours: int
+--
++registerObserver(observer: DeadlineObserver)
++removeObserver(observer: DeadlineObserver)
++notifyObservers(event: DeadlineEvent)
++checkDeadlines()</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3170</x><y>467</y><w>319</w><h>89</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+DeadlineObserver
+--
+--
++onDeadlineEvent(event: DeadlineEvent)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3110</x><y>680</y><w>319</w><h>72</h></coordinates>
+    <panel_attributes>DashboardObserver
+--
+--
++onDeadlineEvent(event: DeadlineEvent)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3461</x><y>680</y><w>319</w><h>72</h></coordinates>
+    <panel_attributes>NotificationAlertObserver
+--
+--
++onDeadlineEvent(event: DeadlineEvent)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3521</x><y>450</y><w>197</w><h>123</h></coordinates>
+    <panel_attributes>DeadlineEvent
+--
+-applicationId: String
+-dueAt: DateTime
+-hoursRemaining: int
+-overdue: boolean
+--</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>4076</x><y>40</y><w>296</w><h>106</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ResumeRepository
+--
+--
++save(resume: Resume)
++findByUser(userId: String): Resume</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3750</x><y>442</y><w>425</w><h>140</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+JobApplicationRepository
+--
+--
++save(application: JobApplication)
++findById(applicationId: String): JobApplication
++findByUser(userId: String): List&lt;JobApplication&gt;
++findDueBefore(time: DateTime): List&lt;JobApplication&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3686</x><y>852</y><w>387</w><h>106</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+NotificationRepository
+--
+--
++save(notification: Notification)
++findUnread(userId: String): List&lt;Notification&gt;</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>3190</x><y>884</y><w>159</w><h>40</h></coordinates>
+    <panel_attributes>KanbanDashboardUI</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>1861</x><y>50</y><w>283</w><h>86</h></coordinates>
+    <panel_attributes>State pattern: Context. It delegates
+every stage change to currentState.
+States only validate;
+ApplicationService persists.</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>3747</x><y>50</y><w>298</w><h>86</h></coordinates>
+    <panel_attributes>Observer pattern: Subject (Publisher).
+DeadlineScheduler triggers
+checkDeadlines() on a timer; observers
+react to events.</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

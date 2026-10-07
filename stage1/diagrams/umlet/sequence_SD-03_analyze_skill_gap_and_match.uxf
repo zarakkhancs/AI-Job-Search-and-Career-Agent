@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.3.0">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates><x>20</x><y>20</y><w>1710</w><h>1190</h></coordinates>
+    <panel_attributes>title:SD-03: Analyze Skill Gap and Match
+obj=Job Seeker~Seeker
+obj=KanbanDashboardUI~UI
+obj=AIFeatureController~AC
+obj=JobApplicationRepository~JR
+obj=ResumeRepository~RR
+obj=AIEngineFacade~AF
+obj=MatchPromptFactory~MPF
+obj=GeminiClient~GC
+obj=Gemini API~G
+obj=ResponseValidator~RV
+obj=JSONResponseParser~JP
+
+Seeker-&gt;UI : click "Run Match Analysis"
+UI-&gt;AC : analyzeMatch(applicationId)
+AC-&gt;JR : findById(applicationId)
+JR.&gt;AC : JobApplication (with JobPosting)
+AC-&gt;RR : findByUser(userId)
+RR.&gt;AC : Resume
+iframe{:break [no resume or no job posting (3a)]
+AC.&gt;UI : error
+UI.&gt;Seeker : ask to complete the missing step
+iframe}
+AC-&gt;AF : analyzeSkillGap(resume, job)
+AF-&gt;MPF : createPrompt(context)
+MPF.&gt;AF : MatchAnalysisPrompt
+AF-&gt;GC : generate(prompt)
+GC-&gt;G : generateContent(jsonBody)
+iframe{:break [Gemini times out or fails (5a)]
+G.&gt;GC : error or timeout
+GC.&gt;AF : LLMException
+AF.&gt;AC : AIServiceException (logged)
+AC.&gt;UI : error
+UI.&gt;Seeker : "Please retry later" (nothing saved)
+iframe}
+G.&gt;GC : JSON text
+GC.&gt;AF : LLMResponse
+AF-&gt;RV : validateLLMOutput(rawText, schema)
+RV.&gt;AF : ValidationResult
+iframe{:opt [response is malformed (6a)]
+AF-&gt;GC : generate(prompt) retry once
+GC-&gt;G : generateContent(jsonBody)
+G.&gt;GC : JSON text
+GC.&gt;AF : LLMResponse
+AF-&gt;RV : validateLLMOutput(rawText, schema)
+RV.&gt;AF : ValidationResult
+iframe{:break [still invalid, continue as 5a]
+AF.&gt;AC : AIServiceException
+AC.&gt;UI : error
+UI.&gt;Seeker : "Please retry later"
+iframe}
+iframe}
+AF-&gt;JP : parseMatchResult(json)
+JP.&gt;AF : MatchResult
+AF.&gt;AC : MatchResult
+AC-&gt;JR : save(application with MatchResult)
+AC.&gt;UI : MatchResult
+UI.&gt;Seeker : show score and missing skills on the job card</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
