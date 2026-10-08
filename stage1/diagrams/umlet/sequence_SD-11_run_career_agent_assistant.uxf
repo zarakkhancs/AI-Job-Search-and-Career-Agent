@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates><x>20</x><y>20</y><w>2310</w><h>1814</h></coordinates>
-    <panel_attributes>title:SD-11: Run Career Agent Assistant
+    <panel_attributes>title=SD-11: Run Career Agent Assistant
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
 obj=AgentController~AC

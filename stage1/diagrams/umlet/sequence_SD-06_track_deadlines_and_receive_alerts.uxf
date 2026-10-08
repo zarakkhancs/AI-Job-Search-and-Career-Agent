@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates><x>20</x><y>20</y><w>1710</w><h>1214</h></coordinates>
-    <panel_attributes>title:SD-06: Track Deadlines and Receive Alerts
+    <panel_attributes>title=SD-06: Track Deadlines and Receive Alerts
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
 obj=ApplicationController~AC

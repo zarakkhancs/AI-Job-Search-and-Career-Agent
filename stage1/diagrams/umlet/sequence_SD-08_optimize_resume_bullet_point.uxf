@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates><x>20</x><y>20</y><w>1860</w><h>1094</h></coordinates>
-    <panel_attributes>title:SD-08: Optimize Resume Bullet Point
+    <panel_attributes>title=SD-08: Optimize Resume Bullet Point
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
 obj=AIFeatureController~AC

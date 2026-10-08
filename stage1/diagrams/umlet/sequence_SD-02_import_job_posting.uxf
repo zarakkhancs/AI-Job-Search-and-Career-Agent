@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates><x>20</x><y>20</y><w>1260</w><h>998</h></coordinates>
-    <panel_attributes>title:SD-02: Import Job Posting
+    <panel_attributes>title=SD-02: Import Job Posting
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
 obj=JobController~JC

@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates><x>20</x><y>20</y><w>1560</w><h>1166</h></coordinates>
-    <panel_attributes>title:SD-07: Generate Interview Prep Sheet
+    <panel_attributes>title=SD-07: Generate Interview Prep Sheet
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
 obj=AIFeatureController~AC

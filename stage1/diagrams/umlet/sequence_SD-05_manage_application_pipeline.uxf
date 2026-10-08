@@ -4,7 +4,7 @@
   <element>
     <id>UMLSequenceAllInOne</id>
     <coordinates><x>20</x><y>20</y><w>1110</w><h>854</h></coordinates>
-    <panel_attributes>title:SD-05: Manage Application Pipeline
+    <panel_attributes>title=SD-05: Manage Application Pipeline
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
 obj=ApplicationController~AC
