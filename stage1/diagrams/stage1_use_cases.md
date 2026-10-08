@@ -2,9 +2,9 @@
 
 ## 2.2.1 Use-Case Diagram
 
-![Use-case diagram for the AI Job Search and Career Agent](use_case_diagram.png)
+![Use-case diagram for the AI Job Search and Career Agent](umlet/png/use_case_diagram.png)
 
-The diagram source is `use_case_diagram.drawio` (open it in draw.io to edit).
+The diagram source is `umlet/use_case_diagram.uxf` (open it in UMLet to edit).
 
 ### Actors
 

@@ -16,7 +16,7 @@ Please read the files in this order. Together they form the complete Stage 1 rep
 | 6 | Feature-to-design traceability table | [stage1/stage1_part3.md](./stage1/stage1_part3.md) |
 | 7 | Feature implementation explanations | [stage1/stage1_part4.md](./stage1/stage1_part4.md) |
 
-Diagram sources: [use_case_diagram.drawio](./stage1/diagrams/use_case_diagram.drawio) and [use_case_diagram.png](./stage1/diagrams/use_case_diagram.png). Class and sequence diagrams are written in Mermaid and render on GitHub. UMLet versions of every diagram (`.uxf`) are in [stage1/diagrams/umlet/](./stage1/diagrams/umlet/).
+All diagrams are UMLet diagrams. Sources (`.uxf`) and exported images (`.png`) are in [stage1/diagrams/umlet/](./stage1/diagrams/umlet/).
 
 ## Quick Summary
 
