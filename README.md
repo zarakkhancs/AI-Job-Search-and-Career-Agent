@@ -9,9 +9,9 @@ Please read the files in this order. Together they form the complete Stage 1 rep
 | # | Section | File |
 |---|---|---|
 | 1 | Project overview (problem, users, agent, LLM, architecture) and feature specifications F01-F12 | [stage1/stage1_part1.md](./stage1/stage1_part1.md) |
-| 2 | Design pattern explanations (7 patterns) | [stage1/stage1_part2.md](./stage1/stage1_part2.md) |
-| 3 | UML class diagram (Views A-D), pattern participant map, design principles | [stage1/diagrams/stage1_class_diagram.md](./stage1/diagrams/stage1_class_diagram.md) |
-| 4 | UML use-case diagram and use-case descriptions UC-01 to UC-12 | [stage1/diagrams/stage1_use_cases.md](./stage1/diagrams/stage1_use_cases.md) |
+| 2 | UML class diagram (Views A-D), pattern participant map, design principles | [stage1/diagrams/stage1_class_diagram.md](./stage1/diagrams/stage1_class_diagram.md) |
+| 3 | UML use-case diagram and use-case descriptions UC-01 to UC-12 | [stage1/diagrams/stage1_use_cases.md](./stage1/diagrams/stage1_use_cases.md) |
+| 4 | Design pattern explanations (7 patterns) | [stage1/stage1_part2.md](./stage1/stage1_part2.md) |
 | 5 | Sequence diagrams SD-01 to SD-13 | [stage1/diagrams/stage1_sequence_diagrams.md](./stage1/diagrams/stage1_sequence_diagrams.md) |
 | 6 | Feature-to-design traceability table | [stage1/stage1_part3.md](./stage1/stage1_part3.md) |
 | 7 | Feature implementation explanations | [stage1/stage1_part4.md](./stage1/stage1_part4.md) |
