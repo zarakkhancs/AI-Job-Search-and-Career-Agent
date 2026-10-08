@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1860</w><h>1094</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1860</w>
+      <h>1274</h>
+    </coordinates>
     <panel_attributes>title=SD-08: Optimize Resume Bullet Point
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -24,22 +29,24 @@ AC-&gt;RR : findByUser(userId)
 RR.&gt;AC : Resume (contains the BulletPoint)
 AC-&gt;JR : findById(applicationId)
 JR.&gt;AC : JobApplication (with JobPosting)
-iframe{:break [bullet too short or lacks context (3a)]
+combinedFragment=break~f1 Seeker,RC
+Seeker:[bullet too short or lacks context (3a)]
 AC.&gt;UI : NeedMoreDetail
 UI.&gt;Seeker : ask for more specific details (no AI call made)
-iframe}
+--=f1
 AC-&gt;AF : optimizeBullet(bullet, job)
 AF-&gt;BPF : createPrompt(context)
 BPF.&gt;AF : BulletOptimizerPrompt
 AF-&gt;GC : generate(prompt)
 GC-&gt;G : generateContent(jsonBody)
-iframe{:break [Gemini times out or fails (4a)]
+combinedFragment=break~f2 Seeker,RC
+Seeker:[Gemini times out or fails (4a)]
 G.&gt;GC : error or timeout
 GC.&gt;AF : LLMException
 AF.&gt;AC : AIServiceException (logged)
 AC.&gt;UI : error
 UI.&gt;Seeker : "Please retry later"
-iframe}
+--=f2
 G.&gt;GC : JSON text
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, schema)
@@ -49,16 +56,18 @@ JP.&gt;AF : List[BulletSuggestion] (3 items)
 AF.&gt;AC : List[BulletSuggestion]
 AC.&gt;UI : List[BulletSuggestion]
 UI.&gt;Seeker : show three suggestions
-iframe{:alt [Seeker selects one suggestion]
+combinedFragment=alt~f3 Seeker,RC
+Seeker:[Seeker selects one suggestion]
 Seeker-&gt;UI : choose a suggestion
 UI-&gt;RC : replaceBullet(bulletId, suggestedText)
 RC-&gt;RR : save(resume with updated bullet)
 RR.&gt;RC : saved
 RC.&gt;UI : Resume
 UI.&gt;Seeker : bullet text replaced
---[Seeker rejects all suggestions (7a)]
+..=f3
+Seeker:[Seeker rejects all suggestions (7a)]
 UI.&gt;Seeker : original bullet kept, nothing saved
-iframe}</panel_attributes>
-    <additional_attributes/>
+--=f3</panel_attributes>
+    <additional_attributes />
   </element>
 </diagram>

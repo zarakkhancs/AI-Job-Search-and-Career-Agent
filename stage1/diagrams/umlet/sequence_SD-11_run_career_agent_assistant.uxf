@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>2310</w><h>1814</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>2310</w>
+      <h>2294</h>
+    </coordinates>
     <panel_attributes>title=SD-11: Run Career Agent Assistant
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -39,59 +44,66 @@ G.&gt;GC : JSON plan
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, planSchema)
 RV.&gt;AF : ValidationResult
-iframe{:opt [plan is invalid (4a)]
+combinedFragment=opt~f1 Seeker,T
+Seeker:[plan is invalid (4a)]
 PL-&gt;AF : planSteps(request, tools) replan once
 AF.&gt;PL : second attempt
-iframe{:break [still invalid]
+combinedFragment=break~f2 Seeker,T
+Seeker:[still invalid]
 PL.&gt;AC : planning failed
 AC.&gt;UI : AgentResponse (could not plan this request)
 UI.&gt;Seeker : explanation
-iframe}
-iframe}
+--=f2
+--=f1
 AF-&gt;JP : parsePlan(json)
 JP.&gt;AF : Plan
 AF.&gt;PL : Plan
 PL.&gt;AC : Plan
 AC-&gt;PN : needsClarification()
-iframe{:break [request is ambiguous, no job can be identified (2a)]
+combinedFragment=break~f3 Seeker,T
+Seeker:[request is ambiguous, no job can be identified (2a)]
 AC.&gt;UI : AgentResponse (clarifying question)
 UI.&gt;Seeker : asks which job
-iframe}
-AC-&gt;AC : executePlan(plan)
-iframe{:loop [until plan.isComplete()]
+--=f3
+AC-&gt;AC + : executePlan(plan)
+combinedFragment=loop~f4 Seeker,T
+Seeker:[until plan.isComplete()]
 AC-&gt;PN : nextStep()
 PN.&gt;AC : PlanStep(toolName, arguments)
 AC-&gt;RV : validateToolArgs(tool, args)
 RV.&gt;AC : ValidationResult
-iframe{:opt [arguments fail validation (5a)]
+combinedFragment=opt~f5 Seeker,T
+Seeker:[arguments fail validation (5a)]
 AC-&gt;PL : replan(plan, step)
 PL.&gt;AC : revised Plan
-iframe{:break [arguments still invalid]
+combinedFragment=break~f6 Seeker,T
+Seeker:[arguments still invalid]
 AC.&gt;UI : AgentResponse (asks for the missing information)
 UI.&gt;Seeker : asks for missing details
-iframe}
-iframe}
+--=f6
+--=f5
 AC-&gt;TM : executeTool(name, args)
 TM-&gt;T : execute(args)
-iframe{:Note (T,G) the tool calls AIEngineFacade and follows SD-03, SD-04 or SD-07
-iframe}
+T:Note: the tool calls AIEngineFacade and follows SD-03, SD-04 or SD-07
 T.&gt;TM : ToolResult
 TM.&gt;AC : ToolResult
-iframe{:opt [ToolResult.success is false (5b)]
+combinedFragment=opt~f7 Seeker,T
+Seeker:[ToolResult.success is false (5b)]
 AC-&gt;PL : replan(plan, failedStep)
 PL.&gt;AC : revised Plan
-iframe{:break [agent cannot recover]
+combinedFragment=break~f8 Seeker,T
+Seeker:[agent cannot recover]
 AC-&gt;MM : saveInteraction(userId, entry)
 AC.&gt;UI : AgentResponse (completed steps, failed steps, no invented results)
 UI.&gt;Seeker : report of what was done and what failed
-iframe}
-iframe}
-AC-&gt;AC : store ToolResult in PlanStep
-iframe}
+--=f8
+--=f7
+AC-&gt;AC + : store ToolResult in PlanStep
+--=f4
 AC-&gt;MM : saveInteraction(userId, entry)
 MM-&gt;MR : save(userId, entry)
 AC.&gt;UI : AgentResponse (summary of results)
 UI.&gt;Seeker : display summary</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes />
   </element>
 </diagram>

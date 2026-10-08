@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1560</w><h>1166</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1560</w>
+      <h>1466</h>
+    </coordinates>
     <panel_attributes>title=SD-07: Generate Interview Prep Sheet
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -22,44 +27,50 @@ AC-&gt;JR : findById(applicationId)
 JR.&gt;AC : JobApplication (with JobPosting)
 AC-&gt;AF : generatePrepSheet(job)
 AF-&gt;PPF : createPrompt(context)
-iframe{:alt [job description has enough detail]
+combinedFragment=alt~f1 Seeker,JP
+Seeker:[job description has enough detail]
 PPF.&gt;AF : InterviewPrompt (5 technical + 3 behavioral)
---[description too short for technical questions (4a)]
+..=f1
+Seeker:[description too short for technical questions (4a)]
 PPF.&gt;AF : InterviewPrompt (standard behavioral questions, fallback)
-iframe}
+--=f1
 AF-&gt;GC : generate(prompt)
 GC-&gt;G : generateContent(jsonBody)
-iframe{:break [Gemini times out or fails (4b)]
+combinedFragment=break~f2 Seeker,JP
+Seeker:[Gemini times out or fails (4b)]
 G.&gt;GC : error or timeout
 GC.&gt;AF : LLMException
 AF.&gt;AC : AIServiceException (logged)
 AC.&gt;UI : error
 UI.&gt;Seeker : "Please retry later"
-iframe}
+--=f2
 G.&gt;GC : JSON text
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, schema)
 RV.&gt;AF : ValidationResult
-iframe{:opt [response is malformed (5a)]
+combinedFragment=opt~f3 Seeker,JP
+Seeker:[response is malformed (5a)]
 AF-&gt;GC : generate(prompt) retry once
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, schema)
 RV.&gt;AF : ValidationResult
-iframe{:break [still invalid, continue as 4b]
+combinedFragment=break~f4 Seeker,JP
+Seeker:[still invalid, continue as 4b]
 AF.&gt;AC : AIServiceException
 AC.&gt;UI : error
 UI.&gt;Seeker : "Please retry later"
-iframe}
-iframe}
+--=f4
+--=f3
 AF-&gt;JP : parsePrepSheet(json)
 JP.&gt;AF : PrepSheet (with InterviewQuestions, usedFallback flag)
 AF.&gt;AC : PrepSheet
 AC-&gt;JR : save(application with PrepSheet)
 AC.&gt;UI : PrepSheet
 UI.&gt;Seeker : show questions in the prep view
-iframe{:opt [PrepSheet.usedFallback is true]
+combinedFragment=opt~f5 Seeker,JP
+Seeker:[PrepSheet.usedFallback is true]
 UI.&gt;Seeker : notify that standard behavioral questions were used
-iframe}</panel_attributes>
-    <additional_attributes/>
+--=f5</panel_attributes>
+    <additional_attributes />
   </element>
 </diagram>

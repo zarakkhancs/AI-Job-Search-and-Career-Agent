@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1710</w><h>1142</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1710</w>
+      <h>1382</h>
+    </coordinates>
     <panel_attributes>title=SD-04: Generate Cover Letter
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -23,43 +28,47 @@ AC-&gt;JR : findById(applicationId)
 JR.&gt;AC : JobApplication (with JobPosting)
 AC-&gt;RR : findByUser(userId)
 RR.&gt;AC : Resume
-iframe{:break [no resume uploaded (3a)]
+combinedFragment=break~f1 Seeker,JP
+Seeker:[no resume uploaded (3a)]
 AC.&gt;UI : error
 UI.&gt;Seeker : prompt to import a resume first (UC-01)
-iframe}
+--=f1
 AC-&gt;AF : generateCoverLetter(resume, job, tone)
 AF-&gt;CPF : createPrompt(context)
 CPF.&gt;AF : CoverLetterPrompt
 AF-&gt;GC : generate(prompt)
 GC-&gt;G : generateContent(jsonBody)
-iframe{:break [Gemini times out or fails (4a)]
+combinedFragment=break~f2 Seeker,JP
+Seeker:[Gemini times out or fails (4a)]
 G.&gt;GC : error or timeout
 GC.&gt;AF : LLMException
 AF.&gt;AC : AIServiceException (logged)
 AC.&gt;UI : error
 UI.&gt;Seeker : "Service Unavailable - Please Retry" (nothing saved)
-iframe}
+--=f2
 G.&gt;GC : JSON text
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, schema)
 RV.&gt;AF : ValidationResult
-iframe{:opt [response is malformed (5a)]
+combinedFragment=opt~f3 Seeker,JP
+Seeker:[response is malformed (5a)]
 AF-&gt;GC : generate(prompt) retry once
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, schema)
 RV.&gt;AF : ValidationResult
-iframe{:break [still invalid, continue as 4a]
+combinedFragment=break~f4 Seeker,JP
+Seeker:[still invalid, continue as 4a]
 AF.&gt;AC : AIServiceException
 AC.&gt;UI : error
 UI.&gt;Seeker : "Service Unavailable - Please Retry"
-iframe}
-iframe}
+--=f4
+--=f3
 AF-&gt;JP : parseCoverLetter(json)
 JP.&gt;AF : CoverLetter
 AF.&gt;AC : CoverLetter
 AC-&gt;JR : save(application with CoverLetter)
 AC.&gt;UI : CoverLetter
 UI.&gt;Seeker : show letter in editable view</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes />
   </element>
 </diagram>

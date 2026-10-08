@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>810</w><h>614</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>810</w>
+      <h>734</h>
+    </coordinates>
     <panel_attributes>title=SD-13: Run a Feature from the CLI
 obj=Job Seeker (CLI)~User
 obj=CLIApp~CLI
@@ -12,26 +17,28 @@ obj=GenerateCoverLetterCommand~GCC
 obj=AIFeatureController~AC
 
 User-&gt;CLI : main(["cover-letter", "--app", "42", "--tone", "formal"])
-CLI-&gt;CLI : parse(args)
-iframe{:break [unknown command or missing arguments]
+CLI-&gt;CLI + : parse(args)
+combinedFragment=break~f1 User,AC
+User:[unknown command or missing arguments]
 CLI.&gt;User : usage message
-iframe}
+--=f1
 CLI-&gt;GCC : create(applicationId, tone)
 CLI-&gt;CI : execute(command)
-CI-&gt;CI : add command to history
+CI-&gt;CI + : add command to history
 CI-&gt;GCC : execute()
 GCC-&gt;AC : generateCoverLetter(applicationId, tone)
-iframe{:Note (AC) the controller continues exactly as in SD-04 (facade, prompt factory, Gemini, save)
-iframe}
-iframe{:alt [generation succeeds]
+AC:Note: the controller continues exactly as in SD-04 (facade, prompt factory, Gemini, save)
+combinedFragment=alt~f2 User,AC
+User:[generation succeeds]
 AC.&gt;GCC : CoverLetter
 GCC.&gt;CI : CommandResult(success = true, output = letter text)
---[a flow of SD-04 fails (3a, 4a, 5a)]
+..=f2
+User:[a flow of SD-04 fails (3a, 4a, 5a)]
 AC.&gt;GCC : error
 GCC.&gt;CI : CommandResult(success = false, output = error message)
-iframe}
+--=f2
 CI.&gt;CLI : CommandResult
 CLI.&gt;User : print output</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes />
   </element>
 </diagram>

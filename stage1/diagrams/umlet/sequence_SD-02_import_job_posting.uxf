@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1260</w><h>998</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1260</w>
+      <h>1238</h>
+    </coordinates>
     <panel_attributes>title=SD-02: Import Job Posting
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -16,41 +21,45 @@ obj=JobApplicationRepository~JR
 
 Seeker-&gt;UI : paste URL or text and click "Import Job"
 UI-&gt;JC : importJob(source, userId)
-iframe{:break [input is empty (2a)]
+combinedFragment=break~f1 Seeker,JR
+Seeker:[input is empty (2a)]
 JC.&gt;UI : ValidationError
 UI.&gt;Seeker : "Enter a URL or paste the job text"
-iframe}
+--=f1
 JC-&gt;IS : ingestJob(source, userId)
-IS-&gt;IS : selectStrategy(source)
-iframe{:alt [source is a URL]
+IS-&gt;IS + : selectStrategy(source)
+combinedFragment=alt~f2 Seeker,JR
+Seeker:[source is a URL]
 IS-&gt;WS : extract(source)
 WS-&gt;JB : HTTP GET(url)
-iframe{:break [page blocked, unreachable or not found (4a)]
+combinedFragment=break~f3 Seeker,JR
+Seeker:[page blocked, unreachable or not found (4a)]
 JB.&gt;WS : 403, 404 or timeout
 WS.&gt;IS : ScrapeException
 IS.&gt;JC : ScrapeException
 JC.&gt;UI : error
 UI.&gt;Seeker : offer "Enter Job Text Manually" (UC-02a)
-iframe{:Note (Seeker,PT) Seeker pastes the description and the flow restarts at step 2 with a text source
-iframe}
-iframe}
+Seeker:Note: Seeker pastes the description and the flow restarts at step 2 with a text source
+--=f3
 JB.&gt;WS : HTML page
 WS.&gt;IS : ExtractionResult(title, company, description)
---[source is pasted text]
+..=f2
+Seeker:[source is pasted text]
 IS-&gt;PT : extract(source)
 PT.&gt;IS : ExtractionResult(title, company, description)
-iframe}
-iframe{:break [title or description cannot be extracted (5a)]
+--=f2
+combinedFragment=break~f4 Seeker,JR
+Seeker:[title or description cannot be extracted (5a)]
 IS.&gt;JC : ExtractionException
 JC.&gt;UI : error
 UI.&gt;Seeker : ask for the complete job description
-iframe}
-IS-&gt;IS : build JobPosting and JobApplication (WishlistState)
+--=f4
+IS-&gt;IS + : build JobPosting and JobApplication (WishlistState)
 IS-&gt;JR : save(application)
 JR.&gt;IS : saved
 IS.&gt;JC : JobApplication
 JC.&gt;UI : JobApplication
 UI.&gt;Seeker : new card in the Wishlist column</panel_attributes>
-    <additional_attributes/>
+    <additional_attributes />
   </element>
 </diagram>

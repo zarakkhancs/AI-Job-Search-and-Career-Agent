@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1710</w><h>1286</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1710</w>
+      <h>1526</h>
+    </coordinates>
     <panel_attributes>title=SD-12: Practice Mock Interview
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -21,35 +26,38 @@ Seeker-&gt;UI : click "Start Mock Interview"
 UI-&gt;AC : startMockInterview(applicationId)
 AC-&gt;JR : findById(applicationId)
 JR.&gt;AC : JobApplication
-iframe{:opt [application has no PrepSheet yet]
+combinedFragment=opt~f1 Seeker,JP
+Seeker:[application has no PrepSheet yet]
 AC-&gt;AF : generatePrepSheet(job)
 AF.&gt;AC : PrepSheet (see SD-07)
-iframe}
+--=f1
 AC-&gt;MS : create session from PrepSheet questions
 AC-&gt;MS : nextQuestion()
 MS.&gt;AC : InterviewQuestion
 AC.&gt;UI : MockInterviewSession and first question
 UI.&gt;Seeker : show first question
-iframe{:loop [until the questions run out or the Seeker ends the session (8a)]
+combinedFragment=loop~f2 Seeker,JP
+Seeker:[until the questions run out or the Seeker ends the session (8a)]
 Seeker-&gt;UI : type an answer
-iframe{:break [answer is empty (4a)]
+combinedFragment=break~f3 Seeker,JP
+Seeker:[answer is empty (4a)]
 UI.&gt;Seeker : ask to answer or skip
-iframe}
+--=f3
 UI-&gt;AC : submitAnswer(sessionId, answer)
 AC-&gt;AF : evaluateAnswer(question, answer)
 AF-&gt;MPF : createPrompt(context)
 MPF.&gt;AF : MockInterviewPrompt
 AF-&gt;GC : generate(prompt)
 GC-&gt;G : generateContent(jsonBody)
-iframe{:break [Gemini times out or fails (6a)]
+combinedFragment=break~f4 Seeker,JP
+Seeker:[Gemini times out or fails (6a)]
 G.&gt;GC : error or timeout
 GC.&gt;AF : LLMException
 AF.&gt;AC : AIServiceException (logged)
-iframe{:Note (AC,MS) the answer stays in the session so feedback can be requested again
-iframe}
+AC:Note: the answer stays in the session so feedback can be requested again
 AC.&gt;UI : error
 UI.&gt;Seeker : offer to retry the feedback request
-iframe}
+--=f4
 G.&gt;GC : JSON text
 GC.&gt;AF : LLMResponse
 AF-&gt;RV : validateLLMOutput(rawText, schema)
@@ -63,9 +71,8 @@ MS.&gt;AC : InterviewQuestion or none left
 AC-&gt;JR : save(application with session)
 AC.&gt;UI : AnswerFeedback and next question
 UI.&gt;Seeker : show feedback and next question
-iframe}
-iframe{:Note (Seeker,JR) ending early (8a) needs no extra call because the session is saved after every answer
-iframe}</panel_attributes>
-    <additional_attributes/>
+--=f2
+Seeker:Note: ending early (8a) needs no extra call because the session is saved after every answer</panel_attributes>
+    <additional_attributes />
   </element>
 </diagram>

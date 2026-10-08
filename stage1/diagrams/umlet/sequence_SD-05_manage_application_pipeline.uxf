@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1110</w><h>854</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1110</w>
+      <h>974</h>
+    </coordinates>
     <panel_attributes>title=SD-05: Manage Application Pipeline
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -20,30 +25,33 @@ AS-&gt;JR : findById(applicationId)
 JR.&gt;AS : JobApplication
 AS-&gt;JA : changeState(target)
 JA-&gt;ST : handleTransition(app, target)
-iframe{:Note (JA,ST) ST is the current state, for example WishlistState or AppliedState
-iframe}
-iframe{:alt [transition is allowed]
+JA:Note: ST is the current state, for example WishlistState or AppliedState
+combinedFragment=alt~f1 Seeker,ST
+Seeker:[transition is allowed]
 ST.&gt;JA : new state assigned to the application
 JA.&gt;AS : done
 AS-&gt;JR : save(application)
-iframe{:alt [database update succeeds]
+combinedFragment=alt~f2 Seeker,ST
+Seeker:[database update succeeds]
 JR.&gt;AS : saved
 AS.&gt;AC : JobApplication
 AC.&gt;UI : JobApplication
 UI.&gt;Seeker : board refreshed
---[database update fails (6a)]
+..=f2
+Seeker:[database update fails (6a)]
 JR.&gt;AS : PersistenceException
 AS.&gt;AC : error
 AC.&gt;UI : error
 UI.&gt;Seeker : card returns to original column, synchronization error shown
-iframe}
---[invalid transition (5a)]
+--=f2
+..=f1
+Seeker:[invalid transition (5a)]
 ST.&gt;JA : InvalidTransitionException
 JA.&gt;AS : InvalidTransitionException
 AS.&gt;AC : error
 AC.&gt;UI : error
 UI.&gt;Seeker : card returns to original column with a message
-iframe}</panel_attributes>
-    <additional_attributes/>
+--=f1</panel_attributes>
+    <additional_attributes />
   </element>
 </diagram>

@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>810</w><h>662</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>810</w>
+      <h>782</h>
+    </coordinates>
     <panel_attributes>title=SD-09: View Job Search Analytics
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -15,25 +20,28 @@ Seeker-&gt;UI : open the "Analytics" tab
 UI-&gt;AN : getDashboardMetrics(userId)
 AN-&gt;MS : countByStage(userId)
 MS-&gt;JR : findByUser(userId)
-iframe{:break [database query fails (3a)]
+combinedFragment=break~f1 Seeker,JR
+Seeker:[database query fails (3a)]
 JR.&gt;MS : PersistenceException
 MS.&gt;AN : error
 AN.&gt;UI : error
 UI.&gt;Seeker : error message, no charts
-iframe}
+--=f1
 JR.&gt;MS : List[JobApplication]
 MS.&gt;AN : Map of counts per stage
 AN-&gt;MS : calculateConversionRate(userId)
 MS.&gt;AN : conversion rate
 AN-&gt;MS : volumeOverTime(userId)
 MS.&gt;AN : List[DataPoint]
-AN-&gt;AN : assemble DashboardMetrics
+AN-&gt;AN + : assemble DashboardMetrics
 AN.&gt;UI : DashboardMetrics
-iframe{:alt [totalApplications is 0 (4a)]
+combinedFragment=alt~f2 Seeker,JR
+Seeker:[totalApplications is 0 (4a)]
 UI.&gt;Seeker : empty placeholder charts and a prompt to add the first job
---[data exists]
+..=f2
+Seeker:[data exists]
 UI.&gt;Seeker : bar graph and conversion funnel
-iframe}</panel_attributes>
-    <additional_attributes/>
+--=f2</panel_attributes>
+    <additional_attributes />
   </element>
 </diagram>

@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <diagram program="umlet" version="14.3.0">
   <zoom_level>10</zoom_level>
   <element>
     <id>UMLSequenceAllInOne</id>
-    <coordinates><x>20</x><y>20</y><w>1710</w><h>1214</h></coordinates>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1710</w>
+      <h>1634</h>
+    </coordinates>
     <panel_attributes>title=SD-06: Track Deadlines and Receive Alerts
 obj=Job Seeker~Seeker
 obj=KanbanDashboardUI~UI
@@ -17,12 +22,13 @@ obj=DashboardObserver~DO
 obj=NotificationAlertObserver~NO
 obj=NotificationRepository~NR
 
-iframe{:Part A - set a deadline
+combinedFragment=Part A - set a deadline~f1 Seeker,NR
 Seeker-&gt;UI : choose date and time on a job card
-UI-&gt;UI : validate date
-iframe{:break [invalid date or format (2a)]
+UI-&gt;UI + : validate date
+combinedFragment=break~f2 Seeker,NR
+Seeker:[invalid date or format (2a)]
 UI.&gt;Seeker : ask for a valid date
-iframe}
+--=f2
 UI-&gt;AC : setDeadline(applicationId, dueAt)
 AC-&gt;AS : setDeadline(applicationId, dueAt)
 AS-&gt;JR : findById(applicationId)
@@ -33,27 +39,31 @@ JR.&gt;AS : saved
 AS.&gt;AC : JobApplication
 AC.&gt;UI : JobApplication
 UI.&gt;Seeker : deadline shown on the card
-iframe}
-iframe{:Part B - periodic check (Observer pattern)
-iframe{:loop [every intervalMinutes]
-DSch-&gt;DSch : runCheck()
+--=f1
+combinedFragment=Part B - periodic check (Observer pattern)~f3 Seeker,NR
+combinedFragment=loop~f4 Seeker,NR
+Seeker:[every intervalMinutes]
+DSch-&gt;DSch + : runCheck()
 DSch-&gt;DS : checkDeadlines()
 DS-&gt;JR : findDueBefore(now + thresholdHours)
 JR.&gt;DS : List[JobApplication]
-iframe{:opt [at least one deadline within 48 hours or overdue (5a otherwise no events)]
-iframe{:loop [for each application]
-DS-&gt;DS : create DeadlineEvent
-DS-&gt;DS : notifyObservers(event)
+combinedFragment=opt~f5 Seeker,NR
+Seeker:[at least one deadline within 48 hours or overdue (5a otherwise no events)]
+combinedFragment=loop~f6 Seeker,NR
+Seeker:[for each application]
+DS-&gt;DS + : create DeadlineEvent
+DS-&gt;DS + : notifyObservers(event)
 DS-&gt;DO : onDeadlineEvent(event)
 DO-&gt;UI : push alert via SSE
 DS-&gt;NO : onDeadlineEvent(event)
 NO-&gt;NR : save(Notification)
-iframe}
-iframe}
-iframe}
+--=f6
+--=f5
+--=f4
 UI.&gt;Seeker : priority alert on the card and banner on the dashboard
-iframe}
-iframe{:opt [dashboard was closed when the alert fired (6a)]
+--=f3
+combinedFragment=opt~f7 Seeker,NR
+Seeker:[dashboard was closed when the alert fired (6a)]
 Seeker-&gt;UI : open dashboard later
 UI-&gt;AC : getUnreadNotifications(userId)
 AC-&gt;AS : getUnreadNotifications(userId)
@@ -62,7 +72,7 @@ NR.&gt;AS : List[Notification]
 AS.&gt;AC : List[Notification]
 AC.&gt;UI : List[Notification]
 UI.&gt;Seeker : alerts shown on load
-iframe}</panel_attributes>
-    <additional_attributes/>
+--=f7</panel_attributes>
+    <additional_attributes />
   </element>
 </diagram>
