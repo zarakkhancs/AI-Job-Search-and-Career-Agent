@@ -56,6 +56,11 @@ public class AppConfig {
         return values.get(key);
     }
 
+    public String getModel() {
+        String m = values.get("LLM_MODEL");
+        return (m == null || m.isBlank()) ? "gemini-2.5-flash" : m;
+    }
+
     public String getApiKey() {
         String key = values.get(API_KEY_NAME);
         if (key == null || key.isBlank() || key.equals(PLACEHOLDER)) {
@@ -65,3 +70,4 @@ public class AppConfig {
         return key;
     }
 }
+
