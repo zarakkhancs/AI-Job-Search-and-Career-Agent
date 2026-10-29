@@ -53,6 +53,8 @@ public class Main {
         CommandRegistry registry = new CommandRegistry();
         registry.register(new HelpCommand(registry));
         registry.register(new AskCommand(llm));
+        registry.register(new com.careeragent.cli.AlertsCommand(new com.careeragent.alerts.AlertService()));
         return registry;
     }
 }
+
