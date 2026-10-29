@@ -75,6 +75,8 @@ public class Main {
         registry.register(new AskCommand(llm));
         registry.register(new AgentCommand(new AgentController(llm, tools)));
         registry.register(new AlertsCommand(alerts));
+        registry.register(new com.careeragent.cli.TrackCommand(new com.careeragent.pipeline.ApplicationService(alerts)));
         return registry;
     }
 }
+
