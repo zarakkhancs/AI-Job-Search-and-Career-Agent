@@ -10,25 +10,52 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.Duration;
+import java.util.Set;
 
-/** Adapter that makes the Gemini REST API look like an LLMClient. */
+/** Adapter that makes the Gemini REST API look like an LLMClient, with retry on temporary failures. */
 public class GeminiClient implements LLMClient {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String BASE_URL =
             "https://generativelanguage.googleapis.com/v1beta/models/";
+    private static final Set<Integer> RETRYABLE = Set.of(429, 500, 502, 503, 504);
+    static final int MAX_ATTEMPTS = 3;
+    static final long BASE_DELAY_MS = 1000;
+    private static final int MAX_ERROR_TEXT = 300;
+
+    /** The raw HTTP outcome, so tests can script responses without a network. */
+    record RawResponse(int status, String body) {
+    }
+
+    interface Transport {
+        RawResponse send(HttpRequest request) throws IOException, InterruptedException;
+    }
+
+    interface Sleeper {
+        void sleep(long millis) throws InterruptedException;
+    }
 
     private final String apiKey;
     private final String model;
-    private final HttpClient http;
+    private final Transport transport;
+    private final Sleeper sleeper;
 
     public GeminiClient(String apiKey, String model) {
-        this(apiKey, model, HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(15)).build());
+        this(apiKey, model, httpTransport(), Thread::sleep);
     }
 
-    GeminiClient(String apiKey, String model, HttpClient http) {
+    GeminiClient(String apiKey, String model, Transport transport, Sleeper sleeper) {
         this.apiKey = apiKey;
         this.model = model;
-        this.http = http;
+        this.transport = transport;
+        this.sleeper = sleeper;
+    }
+
+    private static Transport httpTransport() {
+        HttpClient http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(15)).build();
+        return request -> {
+            HttpResponse<String> r = http.send(request, HttpResponse.BodyHandlers.ofString());
+            return new RawResponse(r.statusCode(), r.body());
+        };
     }
 
     @Override
@@ -36,16 +63,23 @@ public class GeminiClient implements LLMClient {
         if (prompt == null || prompt.isBlank()) {
             throw new LLMException("Prompt must not be empty.");
         }
+        HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + model + ":generateContent"))
+                .timeout(Duration.ofSeconds(60))
+                .header("Content-Type", "application/json")
+                .header("x-goog-api-key", apiKey)
+                .POST(HttpRequest.BodyPublishers.ofString(buildRequestBody(prompt)))
+                .build();
         try {
-            HttpRequest request = HttpRequest.newBuilder(URI.create(BASE_URL + model + ":generateContent"))
-                    .timeout(Duration.ofSeconds(60))
-                    .header("Content-Type", "application/json")
-                    .header("x-goog-api-key", apiKey)
-                    .POST(HttpRequest.BodyPublishers.ofString(buildRequestBody(prompt)))
-                    .build();
-            HttpResponse<String> response = http.send(request, HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200) {
-                throw new LLMException("Gemini API returned HTTP " + response.statusCode());
+            RawResponse response = null;
+            for (int attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+                response = transport.send(request);
+                if (!RETRYABLE.contains(response.status()) || attempt == MAX_ATTEMPTS) {
+                    break;
+                }
+                sleeper.sleep(BASE_DELAY_MS * attempt);
+            }
+            if (response.status() != 200) {
+                throw new LLMException(describeError(response.status(), response.body()));
             }
             return parseResponse(response.body());
         } catch (IOException e) {
@@ -54,6 +88,21 @@ public class GeminiClient implements LLMClient {
             Thread.currentThread().interrupt();
             throw new LLMException("Request was interrupted.", e);
         }
+    }
+
+    static String describeError(int status, String body) {
+        String base = "Gemini API returned HTTP " + status;
+        try {
+            String message = MAPPER.readTree(body == null ? "" : body).path("error").path("message").asText("");
+            if (!message.isBlank()) {
+                String trimmed = message.length() > MAX_ERROR_TEXT
+                        ? message.substring(0, MAX_ERROR_TEXT) + "..." : message;
+                return base + ": " + trimmed;
+            }
+        } catch (JsonProcessingException e) {
+            // Body was not JSON; fall back to the status code alone.
+        }
+        return base;
     }
 
     static String buildRequestBody(String prompt) throws LLMException {
