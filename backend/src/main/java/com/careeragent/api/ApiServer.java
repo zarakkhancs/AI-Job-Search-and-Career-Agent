@@ -6,6 +6,9 @@ import com.careeragent.alerts.AlertSource;
 import com.careeragent.alerts.Deadline;
 import com.careeragent.documents.DocumentException;
 import com.careeragent.extraction.ExtractionException;
+import com.careeragent.interview.InterviewException;
+import com.careeragent.interview.InterviewNotFoundException;
+import com.careeragent.interview.InterviewSession;
 import com.careeragent.llm.LLMException;
 import com.careeragent.pipeline.InvalidTransitionException;
 import io.javalin.Javalin;
@@ -28,6 +31,8 @@ public class ApiServer {
     record ExtractRequest(String text) {}
     record DeadlineRequest(String label, String date) {}
     record TailorRequest(String resume, String job) {}
+    record StartInterviewRequest(String resume, String job, Integer count) {}
+    record AnswerRequest(Integer questionId, String answer) {}
 
     private final AppContext ctx;
     // AlertService, ApplicationService and the deadline list use plain collections,
@@ -131,13 +136,35 @@ public class ApiServer {
             c.json(ctx.extractor.extract(body.text()));
         });
 
-                // Tailored resume summary and cover letter, with a factual check against the resume
+        // Tailored resume summary and cover letter, with a factual check against the resume
         app.post("/api/documents/tailor", c -> {
             TailorRequest body = c.bodyAsClass(TailorRequest.class);
             require(body.resume(), "resume");
             require(body.job(), "job");
             c.json(ctx.documents.tailor(body.resume(), body.job()));
         });
+
+        // Mock interview (LLM calls, so not under the lock)
+        app.post("/api/interview/start", c -> {
+            StartInterviewRequest body = c.bodyAsClass(StartInterviewRequest.class);
+            require(body.resume(), "resume");
+            require(body.job(), "job");
+            int count = body.count() == null ? 5 : body.count();
+            c.status(201).json(sessionJson(ctx.interviews.start(body.resume(), body.job(), count)));
+        });
+        app.get("/api/interview/{id}", c ->
+                c.json(sessionJson(ctx.interviews.get(c.pathParam("id")))));
+        app.post("/api/interview/{id}/answer", c -> {
+            AnswerRequest body = c.bodyAsClass(AnswerRequest.class);
+            if (body.questionId() == null) {
+                throw new IllegalArgumentException("questionId is required.");
+            }
+            require(body.answer(), "answer");
+            c.json(ctx.interviews.answer(c.pathParam("id"), body.questionId(), body.answer()));
+        });
+        app.post("/api/interview/{id}/finish", c ->
+                c.json(ctx.interviews.finish(c.pathParam("id"))));
+
         // Agent (calls the LLM, so it is not under the lock)
         app.post("/api/agent/ask", c -> {
             AskRequest body = c.bodyAsClass(AskRequest.class);
@@ -153,9 +180,14 @@ public class ApiServer {
                 c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(ExtractionException.class, (e, c) ->
                 c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
-
         app.exception(DocumentException.class, (e, c) ->
                 c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(InterviewNotFoundException.class, (e, c) ->
+                c.status(404).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(InterviewException.class, (e, c) ->
+                c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(IllegalStateException.class, (e, c) ->
+                c.status(409).json(Map.of("error", String.valueOf(e.getMessage()))));
 
         return app;
     }
@@ -209,6 +241,16 @@ public class ApiServer {
         Map<String, Object> m = new LinkedHashMap<>();
         m.put("label", d.label());
         m.put("date", d.date().toString());
+        return m;
+    }
+
+    // Keeps the resume and job text out of the response.
+    private static Map<String, Object> sessionJson(InterviewSession s) {
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("id", s.getId());
+        m.put("status", s.getStatus().name());
+        m.put("questions", s.getQuestions());
+        m.put("feedback", s.getFeedback());
         return m;
     }
 }

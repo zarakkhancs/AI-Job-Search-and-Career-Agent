@@ -11,6 +11,7 @@ import com.careeragent.documents.TailorDocumentTool;
 import com.careeragent.documents.TailoredDocumentService;
 import com.careeragent.extraction.ExtractSkillsTool;
 import com.careeragent.extraction.SkillExtractor;
+import com.careeragent.interview.MockInterviewService;
 import com.careeragent.llm.GeminiClient;
 import com.careeragent.llm.LLMClient;
 import com.careeragent.llm.LLMException;
@@ -32,6 +33,7 @@ public class AppContext {
     public final JobMatcher matcher = new JobMatcher(new KeywordOverlapStrategy());
     public final SkillExtractor extractor;
     public final TailoredDocumentService documents;
+    public final MockInterviewService interviews;
     public final List<Deadline> deadlines = new ArrayList<>();
     public final DeadlineScheduler scheduler = new DeadlineScheduler(alerts, 7);
     public final ToolRegistry tools = new ToolRegistry();
@@ -41,6 +43,7 @@ public class AppContext {
         this.llm = llm;
         this.extractor = new SkillExtractor(llm);
         this.documents = new TailoredDocumentService(llm, extractor);
+        this.interviews = new MockInterviewService(llm, extractor);
         tools.register(new ExtractSkillsTool(extractor));
         tools.register(new MatchJobTool(matcher));
         tools.register(new TailorDocumentTool(documents));
