@@ -3,6 +3,8 @@ package com.careeragent;
 import com.careeragent.agent.AgentController;
 import com.careeragent.agent.ToolRegistry;
 import com.careeragent.alerts.AlertService;
+import com.careeragent.alerts.Deadline;
+import com.careeragent.alerts.DeadlineScheduler;
 import com.careeragent.config.AppConfig;
 import com.careeragent.config.ConfigException;
 import com.careeragent.extraction.ExtractSkillsTool;
@@ -17,6 +19,8 @@ import com.careeragent.pipeline.ApplicationService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 /** Builds and holds the shared services used by both the CLI and the HTTP API. */
 public class AppContext {
@@ -24,14 +28,23 @@ public class AppContext {
     public final AlertService alerts = new AlertService();
     public final ApplicationService applications = new ApplicationService(alerts);
     public final JobMatcher matcher = new JobMatcher(new KeywordOverlapStrategy());
+    public final SkillExtractor extractor;
+    public final List<Deadline> deadlines = new ArrayList<>();
+    public final DeadlineScheduler scheduler = new DeadlineScheduler(alerts, 7);
     public final ToolRegistry tools = new ToolRegistry();
     public final AgentController agent;
 
     private AppContext(LLMClient llm) {
         this.llm = llm;
-        tools.register(new ExtractSkillsTool(new SkillExtractor(llm)));
+        this.extractor = new SkillExtractor(llm);
+        tools.register(new ExtractSkillsTool(extractor));
         tools.register(new MatchJobTool(matcher));
         this.agent = new AgentController(llm, tools);
+    }
+
+    /** Builds a context around the given LLM client (used by tests). */
+    public static AppContext withLlm(LLMClient llm) {
+        return new AppContext(llm);
     }
 
     public static AppContext load() throws IOException {

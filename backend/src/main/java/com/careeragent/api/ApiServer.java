@@ -3,9 +3,15 @@ package com.careeragent.api;
 import com.careeragent.AppContext;
 import com.careeragent.alerts.Alert;
 import com.careeragent.alerts.AlertSource;
+import com.careeragent.alerts.Deadline;
+import com.careeragent.extraction.ExtractionException;
+import com.careeragent.llm.LLMException;
 import com.careeragent.pipeline.InvalidTransitionException;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -18,9 +24,12 @@ public class ApiServer {
     record MoveRequest(String action) {}
     record MatchRequest(List<String> resumeSkills, List<String> jobSkills) {}
     record AskRequest(String request) {}
+    record ExtractRequest(String text) {}
+    record DeadlineRequest(String label, String date) {}
 
     private final AppContext ctx;
-    // AlertService and ApplicationService use plain collections, so serialize access.
+    // AlertService, ApplicationService and the deadline list use plain collections,
+    // so serialize access.
     private final Object lock = new Object();
 
     public ApiServer(AppContext ctx) {
@@ -28,6 +37,11 @@ public class ApiServer {
     }
 
     public Javalin start(int port) {
+        return create().start(port);
+    }
+
+    /** Builds the app with all routes but does not start it (tests start it themselves). */
+    public Javalin create() {
         Javalin app = Javalin.create(config -> {
             config.bundledPlugins.enableCors(cors ->
                     cors.addRule(rule -> rule.allowHost("http://localhost:3000")));
@@ -79,6 +93,26 @@ public class ApiServer {
         app.post("/api/alerts/read-all", c ->
                 c.json(Map.of("marked", locked(() -> ctx.alerts.markAllRead()))));
 
+        // Deadlines
+        app.get("/api/deadlines", c -> c.json(locked(() -> ctx.deadlines.stream()
+                .sorted(Comparator.comparing(Deadline::date))
+                .map(ApiServer::deadlineJson)
+                .toList())));
+        app.post("/api/deadlines", c -> {
+            DeadlineRequest body = c.bodyAsClass(DeadlineRequest.class);
+            require(body.label(), "label");
+            require(body.date(), "date");
+            Deadline deadline = new Deadline(body.label().trim(), parseDate(body.date()));
+            locked(() -> {
+                ctx.deadlines.add(deadline);
+                return null;
+            });
+            c.status(201).json(deadlineJson(deadline));
+        });
+        // Scans deadlines and publishes SCHEDULER alerts for ones coming up soon.
+        app.post("/api/deadlines/check", c -> c.json(Map.of("created", locked(() ->
+                ctx.scheduler.check(List.copyOf(ctx.deadlines), LocalDate.now())))));
+
         // Matching
         app.post("/api/match", c -> {
             MatchRequest body = c.bodyAsClass(MatchRequest.class);
@@ -86,6 +120,13 @@ public class ApiServer {
                 throw new IllegalArgumentException("resumeSkills and jobSkills are required.");
             }
             c.json(ctx.matcher.match(body.resumeSkills(), body.jobSkills()));
+        });
+
+        // Skill extraction (LLM call, then each skill is verified against the source text)
+        app.post("/api/extract", c -> {
+            ExtractRequest body = c.bodyAsClass(ExtractRequest.class);
+            require(body.text(), "text");
+            c.json(ctx.extractor.extract(body.text()));
         });
 
         // Agent (calls the LLM, so it is not under the lock)
@@ -99,8 +140,12 @@ public class ApiServer {
                 c.status(400).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(InvalidTransitionException.class, (e, c) ->
                 c.status(409).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(LLMException.class, (e, c) ->
+                c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(ExtractionException.class, (e, c) ->
+                c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
 
-        return app.start(port);
+        return app;
     }
 
     private <T> T locked(Supplier<T> action) {
@@ -125,6 +170,14 @@ public class ApiServer {
         }
     }
 
+    private static LocalDate parseDate(String value) {
+        try {
+            return LocalDate.parse(value.trim());
+        } catch (DateTimeParseException e) {
+            throw new IllegalArgumentException("date must look like 2026-11-10.");
+        }
+    }
+
     private static void require(String value, String field) {
         if (value == null || value.isBlank()) {
             throw new IllegalArgumentException(field + " must not be blank.");
@@ -137,6 +190,13 @@ public class ApiServer {
         m.put("message", a.message());
         m.put("source", a.source().name());
         m.put("read", a.isRead());
+        return m;
+    }
+
+    private static Map<String, Object> deadlineJson(Deadline d) {
+        Map<String, Object> m = new LinkedHashMap<>();
+        m.put("label", d.label());
+        m.put("date", d.date().toString());
         return m;
     }
 }
