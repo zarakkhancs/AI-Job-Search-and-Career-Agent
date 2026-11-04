@@ -4,6 +4,7 @@ import com.careeragent.AppContext;
 import com.careeragent.alerts.Alert;
 import com.careeragent.alerts.AlertSource;
 import com.careeragent.alerts.Deadline;
+import com.careeragent.documents.DocumentException;
 import com.careeragent.extraction.ExtractionException;
 import com.careeragent.llm.LLMException;
 import com.careeragent.pipeline.InvalidTransitionException;
@@ -26,6 +27,7 @@ public class ApiServer {
     record AskRequest(String request) {}
     record ExtractRequest(String text) {}
     record DeadlineRequest(String label, String date) {}
+    record TailorRequest(String resume, String job) {}
 
     private final AppContext ctx;
     // AlertService, ApplicationService and the deadline list use plain collections,
@@ -129,6 +131,13 @@ public class ApiServer {
             c.json(ctx.extractor.extract(body.text()));
         });
 
+                // Tailored resume summary and cover letter, with a factual check against the resume
+        app.post("/api/documents/tailor", c -> {
+            TailorRequest body = c.bodyAsClass(TailorRequest.class);
+            require(body.resume(), "resume");
+            require(body.job(), "job");
+            c.json(ctx.documents.tailor(body.resume(), body.job()));
+        });
         // Agent (calls the LLM, so it is not under the lock)
         app.post("/api/agent/ask", c -> {
             AskRequest body = c.bodyAsClass(AskRequest.class);
@@ -143,6 +152,9 @@ public class ApiServer {
         app.exception(LLMException.class, (e, c) ->
                 c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(ExtractionException.class, (e, c) ->
+                c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
+
+        app.exception(DocumentException.class, (e, c) ->
                 c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
 
         return app;

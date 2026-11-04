@@ -7,6 +7,8 @@ import com.careeragent.alerts.Deadline;
 import com.careeragent.alerts.DeadlineScheduler;
 import com.careeragent.config.AppConfig;
 import com.careeragent.config.ConfigException;
+import com.careeragent.documents.TailorDocumentTool;
+import com.careeragent.documents.TailoredDocumentService;
 import com.careeragent.extraction.ExtractSkillsTool;
 import com.careeragent.extraction.SkillExtractor;
 import com.careeragent.llm.GeminiClient;
@@ -29,6 +31,7 @@ public class AppContext {
     public final ApplicationService applications = new ApplicationService(alerts);
     public final JobMatcher matcher = new JobMatcher(new KeywordOverlapStrategy());
     public final SkillExtractor extractor;
+    public final TailoredDocumentService documents;
     public final List<Deadline> deadlines = new ArrayList<>();
     public final DeadlineScheduler scheduler = new DeadlineScheduler(alerts, 7);
     public final ToolRegistry tools = new ToolRegistry();
@@ -37,8 +40,10 @@ public class AppContext {
     private AppContext(LLMClient llm) {
         this.llm = llm;
         this.extractor = new SkillExtractor(llm);
+        this.documents = new TailoredDocumentService(llm, extractor);
         tools.register(new ExtractSkillsTool(extractor));
         tools.register(new MatchJobTool(matcher));
+        tools.register(new TailorDocumentTool(documents));
         this.agent = new AgentController(llm, tools);
     }
 
