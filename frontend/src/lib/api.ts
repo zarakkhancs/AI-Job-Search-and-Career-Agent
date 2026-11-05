@@ -1,5 +1,33 @@
 ﻿export type Alert = { id: number; message: string; source: string; read: boolean };
 export type Deadline = { label: string; date: string };
+export type Extraction = { verified: string[]; rejected: string[] };
+export type MatchResult = { score: number; matched: string[]; missing: string[] };
+export type Tailored = {
+  summary: string;
+  coverLetter: string;
+  supportedSkills: string[];
+  flaggedSkills: string[];
+};
+export type InterviewQuestion = { id: number; type: string; text: string };
+export type InterviewSession = {
+  id: string;
+  status: string;
+  questions: InterviewQuestion[];
+  feedback: unknown[];
+};
+export type AnswerFeedback = {
+  questionId: number;
+  answer: string;
+  score: number;
+  feedback: string;
+  flaggedClaims: string[];
+};
+export type InterviewSummary = {
+  answered: number;
+  total: number;
+  averageScore: number;
+  flaggedClaims: string[];
+};
 
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`/api${path}`, {
@@ -30,6 +58,16 @@ export const api = {
   markAlertRead: (id: number) => request<{ status: string }>(`/alerts/${id}/read`, post()),
   markAllRead: () => request<{ marked: unknown }>("/alerts/read-all", post()),
 
-  extractSkills: (text: string) => request<unknown>("/extract", post({ text })),
-};
+  extractSkills: (text: string) => request<Extraction>("/extract", post({ text })),
+  matchSkills: (resumeSkills: string[], jobSkills: string[]) =>
+    request<MatchResult>("/match", post({ resumeSkills, jobSkills })),
+  tailorDocuments: (resume: string, job: string) =>
+    request<Tailored>("/documents/tailor", post({ resume, job })),
 
+  startInterview: (resume: string, job: string, count: number) =>
+    request<InterviewSession>("/interview/start", post({ resume, job, count })),
+  answerQuestion: (id: string, questionId: number, answer: string) =>
+    request<AnswerFeedback>(`/interview/${id}/answer`, post({ questionId, answer })),
+  finishInterview: (id: string) =>
+    request<InterviewSummary>(`/interview/${id}/finish`, post()),
+};
