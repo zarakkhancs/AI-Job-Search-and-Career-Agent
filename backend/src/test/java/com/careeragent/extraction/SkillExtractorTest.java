@@ -33,9 +33,28 @@ class SkillExtractorTest {
     }
 
     @Test
-    void invalidResponseThrows() {
-        SkillExtractor ex = new SkillExtractor(new MockLLMClient("no list here"));
+    void invalidResponseThrowsAfterOneRetry() {
+        MockLLMClient mock = new MockLLMClient("no list here", "still no list");
+        SkillExtractor ex = new SkillExtractor(mock);
         assertThrows(ExtractionException.class, () -> ex.extract("Java developer"));
+        assertEquals(2, mock.getPrompts().size());
+    }
+
+    @Test
+    void retriesOnceAndSucceeds() throws Exception {
+        MockLLMClient mock = new MockLLMClient("Java, SQL", "[\"Java\"]");
+        SkillExtractor ex = new SkillExtractor(mock);
+        assertEquals(List.of("Java"), ex.extract("Java developer").verified());
+        assertEquals(2, mock.getPrompts().size());
+        assertTrue(mock.getPrompts().get(1).contains("Return ONLY the JSON array"));
+    }
+
+    @Test
+    void goodFirstReplyMakesOneCall() throws Exception {
+        MockLLMClient mock = new MockLLMClient("[\"Java\"]");
+        SkillExtractor ex = new SkillExtractor(mock);
+        ex.extract("Java developer");
+        assertEquals(1, mock.getPrompts().size());
     }
 
     @Test

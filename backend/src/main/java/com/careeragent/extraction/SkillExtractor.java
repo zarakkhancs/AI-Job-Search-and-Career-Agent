@@ -24,8 +24,15 @@ public class SkillExtractor {
         if (text == null || text.isBlank()) {
             throw new IllegalArgumentException("Text must not be blank.");
         }
-        String raw = llm.generate(buildPrompt(text));
-        Set<String> claimed = parseSkills(raw);
+        String prompt = buildPrompt(text);
+        Set<String> claimed;
+        try {
+            claimed = parseSkills(llm.generate(prompt));
+        } catch (ExtractionException first) {
+            // Small models sometimes ignore the format; retry once with a stricter instruction.
+            claimed = parseSkills(llm.generate(prompt
+                    + "\nReturn ONLY the JSON array. Start with [ and end with ]. No other text."));
+        }
         List<String> verified = new ArrayList<>();
         List<String> rejected = new ArrayList<>();
         for (String skill : claimed) {
@@ -52,7 +59,9 @@ public class SkillExtractor {
         int start = json.indexOf('[');
         int end = json.lastIndexOf(']');
         if (start < 0 || end <= start) {
-            throw new ExtractionException("Extractor response contained no JSON array.");
+            String preview = json.length() > 120 ? json.substring(0, 120) + "..." : json;
+            throw new ExtractionException(
+                    "Extractor response contained no JSON array. Got: \"" + preview + "\"");
         }
         JsonNode root;
         try {
