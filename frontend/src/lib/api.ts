@@ -32,3 +32,4 @@ export const api = {
 
   extractSkills: (text: string) => request<unknown>("/extract", post({ text })),
 };
+
