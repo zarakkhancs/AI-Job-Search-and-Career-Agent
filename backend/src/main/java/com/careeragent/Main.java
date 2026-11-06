@@ -7,6 +7,7 @@ import com.careeragent.cli.AlertsCommand;
 import com.careeragent.cli.AskCommand;
 import com.careeragent.cli.CommandRegistry;
 import com.careeragent.cli.HelpCommand;
+import com.careeragent.cli.StatsCommand;
 import com.careeragent.cli.TrackCommand;
 import java.io.IOException;
 import java.util.Scanner;
@@ -52,6 +53,7 @@ public class Main {
         registry.register(new AgentCommand(ctx.agent));
         registry.register(new AlertsCommand(ctx.alerts));
         registry.register(new TrackCommand(ctx.applications));
+        registry.register(new StatsCommand(ctx.metrics));
         return registry;
     }
 }

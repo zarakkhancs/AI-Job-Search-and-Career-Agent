@@ -120,6 +120,9 @@ public class ApiServer {
         app.post("/api/deadlines/check", c -> c.json(Map.of("created", locked(() ->
                 ctx.scheduler.check(List.copyOf(ctx.deadlines), LocalDate.now())))));
 
+        // Analytics (deterministic metrics over the pipeline)
+        app.get("/api/analytics", c -> c.json(locked(() -> ctx.metrics.compute())));
+
         // Matching
         app.post("/api/match", c -> {
             MatchRequest body = c.bodyAsClass(MatchRequest.class);

@@ -3,6 +3,7 @@ package com.careeragent;
 import com.careeragent.agent.AgentController;
 import com.careeragent.agent.ToolRegistry;
 import com.careeragent.alerts.AlertService;
+import com.careeragent.analytics.MetricsService;
 import com.careeragent.alerts.Deadline;
 import com.careeragent.alerts.DeadlineScheduler;
 import com.careeragent.config.AppConfig;
@@ -30,6 +31,7 @@ public class AppContext {
     public final LLMClient llm;
     public final AlertService alerts = new AlertService();
     public final ApplicationService applications = new ApplicationService(alerts);
+    public final MetricsService metrics = new MetricsService(applications);
     public final JobMatcher matcher = new JobMatcher(new KeywordOverlapStrategy());
     public final SkillExtractor extractor;
     public final TailoredDocumentService documents;
