@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-4xl space-y-6 p-6">
       <header className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-4"><h1 className="text-2xl font-bold text-gray-900">AI Job Search and Career Agent</h1><Link href="/skills" className="text-sm text-indigo-600 hover:underline">Skills match</Link><Link href="/tailor" className="text-sm text-indigo-600 hover:underline">Tailor documents</Link><Link href="/interview" className="text-sm text-indigo-600 hover:underline">Mock interview</Link><Link href="/pipeline" className="text-sm text-indigo-600 hover:underline">Pipeline</Link></div>
+        <div className="flex flex-wrap items-center gap-4"><h1 className="text-2xl font-bold text-gray-900">AI Job Search and Career Agent</h1><Link href="/skills" className="text-sm text-indigo-600 hover:underline">Skills match</Link><Link href="/tailor" className="text-sm text-indigo-600 hover:underline">Tailor documents</Link><Link href="/interview" className="text-sm text-indigo-600 hover:underline">Mock interview</Link><Link href="/pipeline" className="text-sm text-indigo-600 hover:underline">Pipeline</Link><Link href="/bullets" className="text-sm text-indigo-600 hover:underline">Bullet optimizer</Link><Link href="/prep" className="text-sm text-indigo-600 hover:underline">Prep sheet</Link></div>
         <span
           className={`rounded-full px-3 py-1 text-xs font-medium ${
             online === null

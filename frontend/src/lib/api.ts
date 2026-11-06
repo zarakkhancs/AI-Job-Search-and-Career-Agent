@@ -29,6 +29,9 @@ export type InterviewSummary = {
   flaggedClaims: string[];
 };
 
+export type BulletVersion = { text: string; unsupportedFigures: string[] };
+export type BulletResult = { original: string; versions: BulletVersion[] };
+export type PrepSheet = { technical: string[]; behavioral: string[] };
 export type Application = { id: number; company: string; title: string; status: string };
 export type Analytics = {
   total: number;
@@ -65,6 +68,11 @@ export const api = {
   moveApplication: (id: number, action: string) =>
     request<Application>(`/applications/${id}/move`, post({ action })),
   getAnalytics: () => request<Analytics>("/analytics"),
+
+  optimizeBullet: (bullet: string, job: string) =>
+    request<BulletResult>("/bullets/optimize", post({ bullet, job })),
+  prepSheet: (job: string, resume: string) =>
+    request<PrepSheet>("/prep", post({ job, resume })),
 
   getDeadlines: () => request<Deadline[]>("/deadlines"),
   addDeadline: (label: string, date: string) =>
