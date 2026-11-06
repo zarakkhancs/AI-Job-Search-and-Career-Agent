@@ -1,4 +1,4 @@
-﻿export type Alert = { id: number; message: string; source: string; read: boolean };
+export type Alert = { id: number; message: string; source: string; read: boolean };
 export type Deadline = { label: string; date: string };
 export type Extraction = { verified: string[]; rejected: string[] };
 export type MatchResult = { score: number; matched: string[]; missing: string[] };
@@ -29,6 +29,16 @@ export type InterviewSummary = {
   flaggedClaims: string[];
 };
 
+export type Application = { id: number; company: string; title: string; status: string };
+export type Analytics = {
+  total: number;
+  submitted: number;
+  byStage: Record<string, number>;
+  interviewRate: number;
+  offerRate: number;
+  rejectionRate: number;
+};
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`/api${path}`, {
     ...init,
@@ -48,6 +58,13 @@ const post = (body?: unknown): RequestInit => ({
 
 export const api = {
   health: () => request<{ status: string }>("/health"),
+
+  getApplications: () => request<Application[]>("/applications"),
+  addApplication: (company: string, title: string) =>
+    request<Application>("/applications", post({ company, title })),
+  moveApplication: (id: number, action: string) =>
+    request<Application>(`/applications/${id}/move`, post({ action })),
+  getAnalytics: () => request<Analytics>("/analytics"),
 
   getDeadlines: () => request<Deadline[]>("/deadlines"),
   addDeadline: (label: string, date: string) =>
