@@ -4,6 +4,12 @@ import com.careeragent.agent.AgentController;
 import com.careeragent.agent.ToolRegistry;
 import com.careeragent.alerts.AlertService;
 import com.careeragent.analytics.MetricsService;
+import com.careeragent.optimizer.BulletOptimizerService;
+import com.careeragent.optimizer.OptimizeBulletTool;
+import com.careeragent.prep.PrepSheetService;
+import com.careeragent.prep.PrepSheetTool;
+import com.careeragent.prompts.BulletPromptFactory;
+import com.careeragent.prompts.PrepSheetPromptFactory;
 import com.careeragent.alerts.Deadline;
 import com.careeragent.alerts.DeadlineScheduler;
 import com.careeragent.config.AppConfig;
@@ -36,6 +42,8 @@ public class AppContext {
     public final SkillExtractor extractor;
     public final TailoredDocumentService documents;
     public final MockInterviewService interviews;
+    public final BulletOptimizerService bullets;
+    public final PrepSheetService prep;
     public final List<Deadline> deadlines = new ArrayList<>();
     public final DeadlineScheduler scheduler = new DeadlineScheduler(alerts, 7);
     public final ToolRegistry tools = new ToolRegistry();
@@ -46,9 +54,13 @@ public class AppContext {
         this.extractor = new SkillExtractor(llm);
         this.documents = new TailoredDocumentService(llm, extractor);
         this.interviews = new MockInterviewService(llm, extractor);
+        this.bullets = new BulletOptimizerService(llm, new BulletPromptFactory());
+        this.prep = new PrepSheetService(llm, new PrepSheetPromptFactory());
         tools.register(new ExtractSkillsTool(extractor));
         tools.register(new MatchJobTool(matcher));
         tools.register(new TailorDocumentTool(documents));
+        tools.register(new OptimizeBulletTool(bullets));
+        tools.register(new PrepSheetTool(prep));
         this.agent = new AgentController(llm, tools);
     }
 

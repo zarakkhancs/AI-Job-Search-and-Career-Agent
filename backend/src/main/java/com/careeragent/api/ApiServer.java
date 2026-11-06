@@ -10,6 +10,8 @@ import com.careeragent.interview.InterviewException;
 import com.careeragent.interview.InterviewNotFoundException;
 import com.careeragent.interview.InterviewSession;
 import com.careeragent.llm.LLMException;
+import com.careeragent.optimizer.OptimizerException;
+import com.careeragent.prep.PrepException;
 import com.careeragent.pipeline.InvalidTransitionException;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
@@ -33,6 +35,8 @@ public class ApiServer {
     record TailorRequest(String resume, String job) {}
     record StartInterviewRequest(String resume, String job, Integer count) {}
     record AnswerRequest(Integer questionId, String answer) {}
+    record BulletRequest(String bullet, String job) {}
+    record PrepRequest(String job, String resume) {}
 
     private final AppContext ctx;
     // AlertService, ApplicationService and the deadline list use plain collections,
@@ -168,6 +172,20 @@ public class ApiServer {
         app.post("/api/interview/{id}/finish", c ->
                 c.json(ctx.interviews.finish(c.pathParam("id"))));
 
+        // Bullet optimizer (LLM call, so not under the lock)
+        app.post("/api/bullets/optimize", c -> {
+            BulletRequest body = c.bodyAsClass(BulletRequest.class);
+            require(body.bullet(), "bullet");
+            c.json(ctx.bullets.optimize(body.bullet(), body.job()));
+        });
+
+        // Interview prep sheet (LLM call)
+        app.post("/api/prep", c -> {
+            PrepRequest body = c.bodyAsClass(PrepRequest.class);
+            require(body.job(), "job");
+            c.json(ctx.prep.generate(body.job(), body.resume()));
+        });
+
         // Agent (calls the LLM, so it is not under the lock)
         app.post("/api/agent/ask", c -> {
             AskRequest body = c.bodyAsClass(AskRequest.class);
@@ -188,6 +206,10 @@ public class ApiServer {
         app.exception(InterviewNotFoundException.class, (e, c) ->
                 c.status(404).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(InterviewException.class, (e, c) ->
+                c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(OptimizerException.class, (e, c) ->
+                c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(PrepException.class, (e, c) ->
                 c.status(502).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(IllegalStateException.class, (e, c) ->
                 c.status(409).json(Map.of("error", String.valueOf(e.getMessage()))));
