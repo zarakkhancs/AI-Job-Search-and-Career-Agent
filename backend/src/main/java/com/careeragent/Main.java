@@ -5,6 +5,7 @@ import com.careeragent.api.ApiServer;
 import com.careeragent.cli.AgentCommand;
 import com.careeragent.cli.AlertsCommand;
 import com.careeragent.cli.AskCommand;
+import com.careeragent.cli.ExportCommand;
 import com.careeragent.cli.CommandRegistry;
 import com.careeragent.cli.HelpCommand;
 import com.careeragent.cli.StatsCommand;
@@ -12,6 +13,7 @@ import com.careeragent.cli.BulletCommand;
 import com.careeragent.cli.PrepCommand;
 import com.careeragent.cli.TrackCommand;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Main {
@@ -58,6 +60,7 @@ public class Main {
         registry.register(new StatsCommand(ctx.metrics));
         registry.register(new BulletCommand(ctx.bullets));
         registry.register(new PrepCommand(ctx.prep));
+        registry.register(new ExportCommand(ctx.documents, ctx.exports, Path.of("exports")));
         return registry;
     }
 }

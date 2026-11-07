@@ -4,6 +4,7 @@ import com.careeragent.agent.AgentController;
 import com.careeragent.agent.ToolRegistry;
 import com.careeragent.alerts.AlertService;
 import com.careeragent.analytics.MetricsService;
+import com.careeragent.export.ExportService;
 import com.careeragent.optimizer.BulletOptimizerService;
 import com.careeragent.optimizer.OptimizeBulletTool;
 import com.careeragent.prep.PrepSheetService;
@@ -38,6 +39,7 @@ public class AppContext {
     public final AlertService alerts = new AlertService();
     public final ApplicationService applications = new ApplicationService(alerts);
     public final MetricsService metrics = new MetricsService(applications);
+    public final ExportService exports = new ExportService();
     public final JobMatcher matcher = new JobMatcher(new KeywordOverlapStrategy());
     public final SkillExtractor extractor;
     public final TailoredDocumentService documents;

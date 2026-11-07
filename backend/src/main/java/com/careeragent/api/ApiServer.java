@@ -37,6 +37,8 @@ public class ApiServer {
     record AnswerRequest(Integer questionId, String answer) {}
     record BulletRequest(String bullet, String job) {}
     record PrepRequest(String job, String resume) {}
+    record ExportRequest(String label, String resume, String summary, String coverLetter,
+                         List<String> flaggedSkills) {}
 
     private final AppContext ctx;
     // AlertService, ApplicationService and the deadline list use plain collections,
@@ -126,6 +128,16 @@ public class ApiServer {
 
         // Analytics (deterministic metrics over the pipeline)
         app.get("/api/analytics", c -> c.json(locked(() -> ctx.metrics.compute())));
+        // Export: compiles summary, cover letter and resume into a downloadable text package
+        app.post("/api/export", c -> {
+            ExportRequest body = c.bodyAsClass(ExportRequest.class);
+            require(body.resume(), "resume");
+            require(body.summary(), "summary");
+            require(body.coverLetter(), "coverLetter");
+            List<String> flagged = body.flaggedSkills() == null ? List.of() : body.flaggedSkills();
+            c.json(ctx.exports.build(body.label(), body.resume(), body.summary(),
+                    body.coverLetter(), flagged));
+        });
 
         // Matching
         app.post("/api/match", c -> {
