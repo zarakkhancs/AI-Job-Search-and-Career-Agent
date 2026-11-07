@@ -32,6 +32,7 @@ export type InterviewSummary = {
 export type BulletVersion = { text: string; unsupportedFigures: string[] };
 export type BulletResult = { original: string; versions: BulletVersion[] };
 export type PrepSheet = { technical: string[]; behavioral: string[] };
+export type ExportFile = { filename: string; content: string };
 export type Application = { id: number; company: string; title: string; status: string };
 export type Analytics = {
   total: number;
@@ -88,6 +89,13 @@ export const api = {
     request<MatchResult>("/match", post({ resumeSkills, jobSkills })),
   tailorDocuments: (resume: string, job: string) =>
     request<Tailored>("/documents/tailor", post({ resume, job })),
+  exportPackage: (body: {
+    label?: string;
+    resume: string;
+    summary: string;
+    coverLetter: string;
+    flaggedSkills: string[];
+  }) => request<ExportFile>("/export", post(body)),
 
   startInterview: (resume: string, job: string, count: number) =>
     request<InterviewSession>("/interview/start", post({ resume, job, count })),

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -49,6 +49,35 @@ export default function TailorPage() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const [result, setResult] = useState<Tailored | null>(null);
+  const [label, setLabel] = useState("");
+  const [exporting, setExporting] = useState(false);
+
+  async function onExport() {
+    if (!result) return;
+    setError("");
+    setExporting(true);
+    try {
+      const file = await api.exportPackage({
+        label: label.trim() || undefined,
+        resume,
+        summary: result.summary,
+        coverLetter: result.coverLetter,
+        flaggedSkills: result.flaggedSkills,
+      });
+      const url = URL.createObjectURL(new Blob([file.content], { type: "text/plain;charset=utf-8" }));
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = file.filename;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Something went wrong.");
+    } finally {
+      setExporting(false);
+    }
+  }
 
   async function onGenerate() {
     setError("");
@@ -123,6 +152,25 @@ export default function TailorPage() {
           <section className={card}>
             <h2 className="mb-2 text-sm font-semibold text-gray-900">Skills supported by your resume</h2>
             <Chips items={result.supportedSkills} tone="green" />
+          </section>
+
+          <section className={card}>
+            <h2 className="mb-2 text-sm font-semibold text-gray-900">Export application package</h2>
+            <p className="mb-3 text-sm text-gray-600">
+              Download the summary, cover letter and resume as one text file. Any flagged skills are
+              listed at the top for review before you send it.
+            </p>
+            <div className="flex flex-wrap items-center gap-3">
+              <input
+                className="w-64 rounded-lg border border-gray-300 px-3 py-2 text-sm text-gray-900"
+                placeholder="Label, e.g. Acme Backend Dev"
+                value={label}
+                onChange={(e) => setLabel(e.target.value)}
+              />
+              <button className={btn} disabled={exporting} onClick={onExport}>
+                {exporting ? "Exporting..." : "Download package"}
+              </button>
+            </div>
           </section>
         </>
       )}
