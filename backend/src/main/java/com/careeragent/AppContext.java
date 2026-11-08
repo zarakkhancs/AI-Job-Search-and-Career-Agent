@@ -8,6 +8,10 @@ import com.careeragent.export.ExportService;
 import com.careeragent.optimizer.BulletOptimizerService;
 import com.careeragent.optimizer.OptimizeBulletTool;
 import com.careeragent.prep.PrepSheetService;
+import com.careeragent.ingestion.HttpPageFetcher;
+import com.careeragent.ingestion.JobIngestionService;
+import com.careeragent.resume.PdfTextExtractor;
+import com.careeragent.resume.ResumeImportService;
 import com.careeragent.prep.PrepSheetTool;
 import com.careeragent.prompts.BulletPromptFactory;
 import com.careeragent.prompts.PrepSheetPromptFactory;
@@ -46,6 +50,8 @@ public class AppContext {
     public final MockInterviewService interviews;
     public final BulletOptimizerService bullets;
     public final PrepSheetService prep;
+    public final ResumeImportService resumes;
+    public final JobIngestionService jobs = new JobIngestionService(new HttpPageFetcher());
     public final List<Deadline> deadlines = new ArrayList<>();
     public final DeadlineScheduler scheduler = new DeadlineScheduler(alerts, 7);
     public final ToolRegistry tools = new ToolRegistry();
@@ -58,6 +64,7 @@ public class AppContext {
         this.interviews = new MockInterviewService(llm, extractor);
         this.bullets = new BulletOptimizerService(llm, new BulletPromptFactory());
         this.prep = new PrepSheetService(llm, new PrepSheetPromptFactory());
+        this.resumes = new ResumeImportService(new PdfTextExtractor(), extractor);
         tools.register(new ExtractSkillsTool(extractor));
         tools.register(new MatchJobTool(matcher));
         tools.register(new TailorDocumentTool(documents));

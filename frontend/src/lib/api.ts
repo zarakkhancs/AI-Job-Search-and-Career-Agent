@@ -32,6 +32,14 @@ export type InterviewSummary = {
 export type BulletVersion = { text: string; unsupportedFigures: string[] };
 export type BulletResult = { original: string; versions: BulletVersion[] };
 export type PrepSheet = { technical: string[]; behavioral: string[] };
+export type JobPosting = { id: number; source: string; text: string };
+export type ParsedResume = {
+  id: number;
+  filename: string;
+  text: string;
+  skills: string[];
+  rejectedSkills: string[];
+};
 export type ExportFile = { filename: string; content: string };
 export type Application = { id: number; company: string; title: string; status: string };
 export type Analytics = {
@@ -89,6 +97,21 @@ export const api = {
     request<MatchResult>("/match", post({ resumeSkills, jobSkills })),
   tailorDocuments: (resume: string, job: string) =>
     request<Tailored>("/documents/tailor", post({ resume, job })),
+  addJob: (input: string) => request<JobPosting>("/jobs", post({ input })),
+  getJobs: () => request<JobPosting[]>("/jobs"),
+  importResumeText: (name: string, text: string) =>
+    request<ParsedResume>("/resumes", post({ name, text })),
+  getResumes: () => request<ParsedResume[]>("/resumes"),
+  uploadResume: async (file: File): Promise<ParsedResume> => {
+    const form = new FormData();
+    form.append("file", file);
+    const res = await fetch("/api/resumes", { method: "POST", body: form });
+    const data = await res.json().catch(() => null);
+    if (!res.ok) {
+      throw new Error((data && data.error) || `Request failed (${res.status})`);
+    }
+    return data as ParsedResume;
+  },
   askAgent: (text: string) =>
     request<{ answer: string }>("/agent/ask", post({ request: text })),
   exportPackage: (body: {

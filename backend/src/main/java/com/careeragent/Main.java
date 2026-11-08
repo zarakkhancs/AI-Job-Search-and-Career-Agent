@@ -6,6 +6,8 @@ import com.careeragent.cli.AgentCommand;
 import com.careeragent.cli.AlertsCommand;
 import com.careeragent.cli.AskCommand;
 import com.careeragent.cli.ExportCommand;
+import com.careeragent.cli.JobCommand;
+import com.careeragent.cli.ResumeCommand;
 import com.careeragent.cli.InterviewCommand;
 import com.careeragent.cli.CommandRegistry;
 import com.careeragent.cli.HelpCommand;
@@ -63,6 +65,8 @@ public class Main {
         registry.register(new PrepCommand(ctx.prep));
         registry.register(new ExportCommand(ctx.documents, ctx.exports, Path.of("exports")));
         registry.register(new InterviewCommand(ctx.interviews));
+        registry.register(new JobCommand(ctx.jobs));
+        registry.register(new ResumeCommand(ctx.resumes));
         return registry;
     }
 }

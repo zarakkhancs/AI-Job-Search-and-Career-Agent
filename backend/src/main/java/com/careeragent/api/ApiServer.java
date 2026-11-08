@@ -9,12 +9,16 @@ import com.careeragent.extraction.ExtractionException;
 import com.careeragent.interview.InterviewException;
 import com.careeragent.interview.InterviewNotFoundException;
 import com.careeragent.interview.InterviewSession;
+import com.careeragent.ingestion.JobIngestException;
+import com.careeragent.resume.ResumeException;
 import com.careeragent.llm.LLMException;
 import com.careeragent.optimizer.OptimizerException;
 import com.careeragent.prep.PrepException;
 import com.careeragent.pipeline.InvalidTransitionException;
 import io.javalin.Javalin;
 import io.javalin.http.Context;
+import io.javalin.http.UploadedFile;
+import java.io.InputStream;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Comparator;
@@ -37,6 +41,8 @@ public class ApiServer {
     record AnswerRequest(Integer questionId, String answer) {}
     record BulletRequest(String bullet, String job) {}
     record PrepRequest(String job, String resume) {}
+    record JobRequest(String input) {}
+    record ResumeTextRequest(String name, String text) {}
     record ExportRequest(String label, String resume, String summary, String coverLetter,
                          List<String> flaggedSkills) {}
 
@@ -128,6 +134,35 @@ public class ApiServer {
 
         // Analytics (deterministic metrics over the pipeline)
         app.get("/api/analytics", c -> c.json(locked(() -> ctx.metrics.compute())));
+        // F02 job posting ingestion: pasted text or a URL
+        app.post("/api/jobs", c -> {
+            JobRequest body = c.bodyAsClass(JobRequest.class);
+            require(body.input(), "input");
+            c.json(ctx.jobs.ingest(body.input()));
+        });
+        app.get("/api/jobs", c -> c.json(ctx.jobs.list()));
+        app.get("/api/jobs/{id}", c -> c.json(ctx.jobs.get(parseId(c))));
+
+        // F01 resume import: PDF upload (multipart field "file") or JSON {name, text}
+        app.post("/api/resumes", c -> {
+            String type = c.contentType();
+            if (type != null && type.toLowerCase(Locale.ROOT).startsWith("multipart/")) {
+                UploadedFile file = c.uploadedFile("file");
+                if (file == null) {
+                    throw new IllegalArgumentException("Choose a PDF file to upload (form field 'file').");
+                }
+                byte[] bytes;
+                try (InputStream in = file.content()) {
+                    bytes = in.readAllBytes();
+                }
+                c.json(ctx.resumes.importPdf(file.filename(), bytes));
+            } else {
+                ResumeTextRequest body = c.bodyAsClass(ResumeTextRequest.class);
+                require(body.text(), "text");
+                c.json(ctx.resumes.importText(body.name(), body.text()));
+            }
+        });
+        app.get("/api/resumes", c -> c.json(ctx.resumes.list()));
         // Export: compiles summary, cover letter and resume into a downloadable text package
         app.post("/api/export", c -> {
             ExportRequest body = c.bodyAsClass(ExportRequest.class);
@@ -205,6 +240,10 @@ public class ApiServer {
             c.json(Map.of("answer", ctx.agent.handle(body.request())));
         });
 
+        app.exception(JobIngestException.class, (e, c) ->
+                c.status(400).json(Map.of("error", String.valueOf(e.getMessage()))));
+        app.exception(ResumeException.class, (e, c) ->
+                c.status(400).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(IllegalArgumentException.class, (e, c) ->
                 c.status(400).json(Map.of("error", String.valueOf(e.getMessage()))));
         app.exception(InvalidTransitionException.class, (e, c) ->
