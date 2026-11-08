@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>20</y><w>349</w><h>107</h></coordinates>
+    <panel_attributes>JobMatcher
+--
+-strategy: MatchingStrategy
+--
++setStrategy(strategy)
++strategyName(): String
++match(resumeSkills, jobSkills): MatchResult
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>489</x><y>20</y><w>349</w><h>84</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+MatchingStrategy
+--
++name(): String
++match(resumeSkills, jobSkills): MatchResult
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>207</y><w>179</w><h>99</h></coordinates>
+    <panel_attributes>&lt;&lt;record&gt;&gt;
+MatchResult
+--
+score: int
+matched: List&lt;String&gt;
+missing: List&lt;String&gt;
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>419</x><y>214</y><w>349</w><h>68</h></coordinates>
+    <panel_attributes>KeywordOverlapStrategy
+--
++name(): String
++match(resumeSkills, jobSkills): MatchResult
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>798</x><y>214</y><w>349</w><h>68</h></coordinates>
+    <panel_attributes>LlmMatchingStrategy
+--
++name(): String
++match(resumeSkills, jobSkills): MatchResult
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>367</x><y>64</y><w>126</w><h>9</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=strategy</panel_attributes>
+    <additional_attributes>2;5;122;2</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>604</x><y>102</y><w>47</w><h>116</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>44;2;3;112</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>731</x><y>102</y><w>189</w><h>116</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>2;2;185;112</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>130</x><y>125</y><w>43</w><h>86</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=returns</panel_attributes>
+    <additional_attributes>40;2;2;82</additional_attributes>
+  </element>
+</diagram>

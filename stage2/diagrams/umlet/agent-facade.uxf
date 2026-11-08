@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>130</y><w>260</w><h>53</h></coordinates>
+    <panel_attributes>AgentController
+--
++handle(request: String): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>390</x><y>20</y><w>260</w><h>53</h></coordinates>
+    <panel_attributes>Planner
+--
++plan(request: String): PlanStep
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>740</x><y>20</y><w>283</w><h>154</h></coordinates>
+    <panel_attributes>&lt;&lt;record&gt;&gt;
+PlanStep
+--
+toolName: String
+args: Map&lt;String, String&gt;
+directAnswer: String
+--
++toolCall(toolName, args): PlanStep
++answer(text): PlanStep
++isDirectAnswer(): boolean
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>390</x><y>163</y><w>223</w><h>84</h></coordinates>
+    <panel_attributes>ToolRegistry
+--
++register(tool)
++find(name): Optional&lt;Tool&gt;
++describeAll(): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>390</x><y>327</y><w>342</w><h>99</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Tool
+--
++name(): String
++description(): String
++execute(args: Map&lt;String, String&gt;): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>264</x><y>506</y><w>127</w><h>84</h></coordinates>
+    <panel_attributes>MatchJobTool
+--
++name()
++description()
++execute(args)
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>431</x><y>506</y><w>149</w><h>84</h></coordinates>
+    <panel_attributes>ExtractSkillsTool
+--
++name()
++description()
++execute(args)
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates><x>620</x><y>506</y><w>238</w><h>68</h></coordinates>
+    <panel_attributes>Other tools
+--
+Tailor, bullet and prep sheet
+tools register the same way
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>237</x><y>71</y><w>197</w><h>63</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=plans</panel_attributes>
+    <additional_attributes>2;59;194;2</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>278</x><y>172</y><w>116</w><h>21</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=dispatches</panel_attributes>
+    <additional_attributes>2;2;112;18</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>648</x><y>62</y><w>96</w><h>19</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=returns</panel_attributes>
+    <additional_attributes>2;3;92;15</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>514</x><y>245</y><w>33</w><h>86</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=tools</panel_attributes>
+    <additional_attributes>2;2;30;82</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>382</x><y>424</y><w>115</w><h>86</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>112;2;3;82</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>517</x><y>424</y><w>31</w><h>86</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>28;2;2;82</additional_attributes>
+  </element>
+</diagram>

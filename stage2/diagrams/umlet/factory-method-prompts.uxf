@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>166</x><y>20</y><w>334</w><h>115</h></coordinates>
+    <panel_attributes>&lt;&lt;abstract&gt;&gt;
+PromptFactory
+--
++create(inputs): Prompt {final}
+#createPrompt(inputs): Prompt {abstract}
+#requiredInputs(): List&lt;String&gt; {abstract}
+#optional(inputs, key): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>200</y><w>253</w><h>68</h></coordinates>
+    <panel_attributes>BulletPromptFactory
+--
+#requiredInputs(): List&lt;String&gt;
+#createPrompt(inputs): Prompt
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>393</x><y>200</y><w>253</w><h>68</h></coordinates>
+    <panel_attributes>PrepSheetPromptFactory
+--
+#requiredInputs(): List&lt;String&gt;
+#createPrompt(inputs): Prompt
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>265</x><y>338</y><w>135</w><h>84</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Prompt
+--
++name(): String
++text(): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>492</y><w>179</w><h>84</h></coordinates>
+    <panel_attributes>&lt;&lt;record&gt;&gt;
+BulletOptimizerPrompt
+--
+bullet: String
+job: String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>393</x><y>492</y><w>135</w><h>84</h></coordinates>
+    <panel_attributes>&lt;&lt;record&gt;&gt;
+PrepSheetPrompt
+--
+job: String
+resume: String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>185</x><y>133</y><w>83</w><h>71</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>79;2;2;67</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>399</x><y>133</y><w>83</w><h>71</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>3;2;80;67</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>112</x><y>266</y><w>34</w><h>230</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=creates</panel_attributes>
+    <additional_attributes>30;2;3;226</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>466</x><y>266</y><w>50</w><h>230</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=creates</panel_attributes>
+    <additional_attributes>47;2;3;226</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>168</x><y>420</y><w>108</w><h>76</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>104;2;2;72</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>365</x><y>420</y><w>64</w><h>76</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>3;2;61;72</additional_attributes>
+  </element>
+</diagram>

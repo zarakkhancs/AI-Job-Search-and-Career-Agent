@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>20</y><w>201</w><h>200</h></coordinates>
+    <panel_attributes>JobApplication
+--
+-state: ApplicationState
+-company: String
+-title: String
+--
++getCompany(): String
++getTitle(): String
++getStatus(): String
++apply()
++scheduleInterview()
++receiveOffer()
++reject()
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>290</y><w>290</w><h>99</h></coordinates>
+    <panel_attributes>ApplicationService
+--
++add(company, title): int
++move(id, action): ApplicationView
++list(): List&lt;ApplicationView&gt;
++list(status): List&lt;ApplicationView&gt;
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>351</x><y>20</y><w>305</w><h>130</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+ApplicationState
+--
++name(): String
++apply(): ApplicationState
++scheduleInterview(): ApplicationState
++receiveOffer(): ApplicationState
++reject(): ApplicationState
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>746</x><y>60</y><w>216</w><h>53</h></coordinates>
+    <panel_attributes>InvalidTransitionException
+--
+extends RuntimeException
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>360</x><y>270</y><w>216</w><h>68</h></coordinates>
+    <panel_attributes>SavedState
+--
++name(): String
++apply(): ApplicationState
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>601</x><y>270</y><w>172</w><h>84</h></coordinates>
+    <panel_attributes>AppliedState
+--
++name(): String
++scheduleInterview()
++reject()
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>798</x><y>270</y><w>135</w><h>84</h></coordinates>
+    <panel_attributes>InterviewState
+--
++name(): String
++receiveOffer()
++reject()
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>958</x><y>270</y><w>135</w><h>53</h></coordinates>
+    <panel_attributes>OfferState
+--
++name(): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1118</x><y>270</y><w>135</w><h>53</h></coordinates>
+    <panel_attributes>RejectedState
+--
++name(): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>219</x><y>96</y><w>136</w><h>18</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=state</panel_attributes>
+    <additional_attributes>2;15;132;3</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>138</x><y>218</y><w>20</w><h>76</h></coordinates>
+    <panel_attributes>lt=-&gt;</panel_attributes>
+    <additional_attributes>17;72;3;2</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>654</x><y>83</y><w>96</w><h>7</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=throws</panel_attributes>
+    <additional_attributes>2;3;92;3</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>471</x><y>148</y><w>25</w><h>126</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>22;2;3;122</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>554</x><y>148</y><w>103</w><h>126</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>2;2;99;122</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>605</x><y>148</y><w>197</w><h>126</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>2;2;194;122</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>654</x><y>144</y><w>310</w><h>130</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>2;3;306;126</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>654</x><y>130</y><w>468</w><h>149</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>2;2;464;146</additional_attributes>
+  </element>
+</diagram>
