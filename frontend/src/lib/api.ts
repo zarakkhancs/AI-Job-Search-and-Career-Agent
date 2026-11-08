@@ -89,6 +89,8 @@ export const api = {
     request<MatchResult>("/match", post({ resumeSkills, jobSkills })),
   tailorDocuments: (resume: string, job: string) =>
     request<Tailored>("/documents/tailor", post({ resume, job })),
+  askAgent: (text: string) =>
+    request<{ answer: string }>("/agent/ask", post({ request: text })),
   exportPackage: (body: {
     label?: string;
     resume: string;
