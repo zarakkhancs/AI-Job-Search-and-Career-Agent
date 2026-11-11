@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLSequenceAllInOne</id>
+    <coordinates>
+      <x>20</x>
+      <y>20</y>
+      <w>1260</w>
+      <h>910</h>
+    </coordinates>
+    <panel_attributes>title=SD-11 (Stage 2): Run Career Agent Assistant, as implemented
+obj=Job Seeker~Seeker
+obj=Agent page / CLI~UI
+obj=ApiServer~API
+obj=AgentController~AC
+obj=Planner~PL
+obj=ToolRegistry~TR
+obj=GeminiClient~GC
+obj=MatchJobTool~T
+
+Seeker-&gt;UI : "Match my skills to this job"
+UI-&gt;API : POST /api/agent/ask
+API-&gt;AC : handle(request)
+AC-&gt;PL : plan(request)
+PL-&gt;TR : describeAll()
+TR.&gt;PL : tool descriptions
+PL-&gt;GC : generate(planning prompt)
+GC.&gt;PL : raw JSON text
+PL-&gt;PL : parse(raw): check JSON, tool name
+combinedFragment=break~f1 Seeker,T
+Seeker:[response is not valid JSON, has no tool, or names an unknown tool]
+PL.&gt;AC : PlanningException
+AC.&gt;API : "I could not plan that request: ..."
+--=f1
+PL.&gt;AC : PlanStep(toolName, args, directAnswer)
+combinedFragment=break~f2 Seeker,T
+Seeker:[planner chose tool 'none': request can be answered directly]
+AC.&gt;API : directAnswer
+--=f2
+AC-&gt;TR : find(toolName)
+TR.&gt;AC : Tool
+AC-&gt;T : execute(args)
+T-&gt;T : JobMatcher.match(resumeSkills, jobSkills)
+T.&gt;AC : result text (or "Tool failed: ..." message)
+AC-&gt;GC : generate(request + tool result, "answer only from the result")
+GC.&gt;AC : final answer
+AC.&gt;API : answer
+API.&gt;UI : { "answer": ... }
+UI.&gt;Seeker : shows the answer</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>

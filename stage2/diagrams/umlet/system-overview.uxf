@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>20</y><w>266</w><h>73</h></coordinates>
+    <panel_attributes>ApiServer (Javalin REST, port 7070)
+--
++start(port): Javalin
++create(): Javalin
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>420</x><y>20</y><w>207</w><h>58</h></coordinates>
+    <panel_attributes>CommandRegistry (CLI)
+--
++dispatch(line: String): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>150</x><y>150</y><w>287</w><h>188</h></coordinates>
+    <panel_attributes>AppContext
+--
++llm: LLMClient
++tools: ToolRegistry
++agent: AgentController
++alerts, +applications, +metrics, +exports
++matcher, +extractor, +documents
++interviews, +bullets, +prep
++resumes, +jobs, +scheduler
+--
++load(): AppContext
++withLlm(llm): AppContext
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>520</y><w>221</w><h>58</h></coordinates>
+    <panel_attributes>AgentController (Facade)
+--
++handle(request: String): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>680</y><w>223</w><h>58</h></coordinates>
+    <panel_attributes>Planner
+--
++plan(request: String): PlanStep
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>300</x><y>680</y><w>206</w><h>73</h></coordinates>
+    <panel_attributes>ToolRegistry
+--
++register(tool)
++find(name): Optional&lt;Tool&gt;
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>620</x><y>680</y><w>164</w><h>103</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+Tool
+--
++name(): String
++description(): String
++execute(args): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>480</x><y>380</y><w>334</w><h>178</h></coordinates>
+    <panel_attributes>Feature services (one per feature)
+--
+F01 ResumeImportService + SkillExtractor
+F02 JobIngestionService
+F03 JobMatcher (Strategy)
+F04 TailoredDocumentService
+F05 ApplicationService (State)
+F06 AlertService + DeadlineScheduler (Observer)
+F07 PrepSheetService   F08 BulletOptimizerService
+F09 MetricsService   F10 ExportService
+F12 MockInterviewService
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>850</x><y>150</y><w>232</w><h>73</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+LLMClient
+--
++generate(prompt: String): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>790</x><y>270</y><w>184</w><h>33</h></coordinates>
+    <panel_attributes>GeminiClient (Adapter)
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>1010</x><y>270</y><w>129</w><h>33</h></coordinates>
+    <panel_attributes>MockLLMClient
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>153</x><y>93</y><w>54</w><h>57</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=uses</panel_attributes>
+    <additional_attributes>0;0;54;57</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>379</x><y>78</y><w>143</w><h>72</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=uses</panel_attributes>
+    <additional_attributes>143;0;0;72</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>365</x><y>338</y><w>181</w><h>42</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=creates</panel_attributes>
+    <additional_attributes>0;0;181;42</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>108</x><y>338</y><w>70</w><h>182</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=creates</panel_attributes>
+    <additional_attributes>70;0;0;182</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>82</x><y>578</y><w>8</w><h>102</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=plans</panel_attributes>
+    <additional_attributes>4;0;4;102</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>241</x><y>549</y><w>141</w><h>131</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=dispatches</panel_attributes>
+    <additional_attributes>0;0;141;131</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>506</x><y>716</y><w>114</w><h>15</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=tools</panel_attributes>
+    <additional_attributes>0;0;114;15</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>647</x><y>558</y><w>55</w><h>122</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=wraps</panel_attributes>
+    <additional_attributes>55;122;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>814</x><y>223</y><w>105</w><h>210</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=asks</panel_attributes>
+    <additional_attributes>0;210;105;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>882</x><y>223</y><w>37</w><h>47</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>37;0;0;47</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>1035</x><y>223</y><w>38</w><h>47</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>0;0;38;47</additional_attributes>
+  </element>
+</diagram>

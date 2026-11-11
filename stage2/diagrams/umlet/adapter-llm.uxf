@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.1">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>330</x><y>20</y><w>232</w><h>73</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+LLMClient
+--
++generate(prompt: String): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>330</x><y>210</y><w>245</w><h>188</h></coordinates>
+    <panel_attributes>GeminiClient
+(Adapter)
+--
+-apiKey: String
+-model: String
+-transport: Transport
+-sleeper: Sleeper
+--
++generate(prompt: String): String
+~buildRequestBody(prompt): String
+~parseResponse(json): String
+~describeError(status, body): String
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>230</y><w>232</w><h>88</h></coordinates>
+    <panel_attributes>MockLLMClient
+(test double)
+--
++generate(prompt: String): String
++getPrompts(): List&lt;String&gt;
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>430</x><y>440</y><w>295</w><h>73</h></coordinates>
+    <panel_attributes>&lt;&lt;interface&gt;&gt;
+GeminiClient.Transport
+--
++send(request: HttpRequest): RawResponse
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>20</x><y>450</y><w>285</w><h>73</h></coordinates>
+    <panel_attributes>&lt;&lt;external&gt;&gt;
+Gemini REST API (Adaptee)
+--
+POST .../models/{model}:generateContent
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates><x>640</x><y>20</y><w>304</w><h>103</h></coordinates>
+    <panel_attributes>Classes that depend only on LLMClient
+--
+Planner, AgentController, AskCommand
+SkillExtractor, TailoredDocumentService
+MockInterviewService, BulletOptimizerService
+PrepSheetService, LlmMatchingStrategy
+bg=white</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>452</x><y>93</y><w>39</w><h>117</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>39;0;0;117</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>252</x><y>93</y><w>112</w><h>181</h></coordinates>
+    <panel_attributes>lt=&lt;&lt;.</panel_attributes>
+    <additional_attributes>112;0;0;181</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>562</x><y>56</y><w>78</w><h>15</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=uses</panel_attributes>
+    <additional_attributes>78;15;0;0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>452</x><y>398</y><w>125</w><h>42</h></coordinates>
+    <panel_attributes>lt=-&gt;
+m2=sends via</panel_attributes>
+    <additional_attributes>0;0;125;42</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates><x>305</x><y>476</y><w>125</w><h>10</h></coordinates>
+    <panel_attributes>lt=.&gt;
+m2=HTTPS JSON</panel_attributes>
+    <additional_attributes>125;0;0;10</additional_attributes>
+  </element>
+</diagram>
