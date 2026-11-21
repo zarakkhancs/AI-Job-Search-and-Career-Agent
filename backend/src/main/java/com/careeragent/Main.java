@@ -5,19 +5,19 @@ import com.careeragent.api.ApiServer;
 import com.careeragent.cli.AgentCommand;
 import com.careeragent.cli.AlertsCommand;
 import com.careeragent.cli.AskCommand;
-import com.careeragent.cli.ExportCommand;
-import com.careeragent.cli.JobCommand;
-import com.careeragent.cli.ResumeCommand;
-import com.careeragent.cli.InterviewCommand;
-import com.careeragent.cli.CommandRegistry;
-import com.careeragent.cli.HelpCommand;
-import com.careeragent.cli.StatsCommand;
 import com.careeragent.cli.BulletCommand;
+import com.careeragent.cli.CliRunner;
+import com.careeragent.cli.CommandRegistry;
+import com.careeragent.cli.ExportCommand;
+import com.careeragent.cli.HelpCommand;
+import com.careeragent.cli.InterviewCommand;
+import com.careeragent.cli.JobCommand;
 import com.careeragent.cli.PrepCommand;
+import com.careeragent.cli.ResumeCommand;
+import com.careeragent.cli.StatsCommand;
 import com.careeragent.cli.TrackCommand;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -27,33 +27,20 @@ public class Main {
             System.out.println("API running on http://localhost:" + port);
             return;
         }
-        CommandRegistry registry = buildRegistry();
-        if (args.length > 0) {
-            System.out.println(registry.dispatch(String.join(" ", args)));
+        if (args.length > 0 && (args[0].equals("--help") || args[0].equals("-h"))) {
+            System.out.println(CliRunner.USAGE);
             return;
         }
-        System.out.println("AI Job Search and Career Agent. Type 'help' for commands, 'exit' to quit.");
-        Scanner in = new Scanner(System.in);
-        while (true) {
-            System.out.print("> ");
-            if (!in.hasNextLine()) {
-                break;
-            }
-            String line = in.nextLine().trim();
-            if (line.equalsIgnoreCase("exit") || line.equalsIgnoreCase("quit")) {
-                break;
-            }
-            String out = registry.dispatch(line);
-            if (!out.isEmpty()) {
-                System.out.println(out);
-            }
+        AppContext ctx = AppContext.load();
+        ctx.alerts.subscribe(new ConsoleAlertObserver(System.out));
+        CliRunner runner = new CliRunner(buildRegistry(ctx), ctx.agent::handle, System.in, System.out, System.err);
+        int code = runner.run(args);
+        if (code != 0) {
+            System.exit(code);
         }
     }
 
-    static CommandRegistry buildRegistry() throws IOException {
-        AppContext ctx = AppContext.load();
-        ctx.alerts.subscribe(new ConsoleAlertObserver(System.out));
-
+    static CommandRegistry buildRegistry(AppContext ctx) {
         CommandRegistry registry = new CommandRegistry();
         registry.register(new HelpCommand(registry));
         registry.register(new AskCommand(ctx.llm));

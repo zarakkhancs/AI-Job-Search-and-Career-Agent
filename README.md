@@ -8,7 +8,7 @@ Where things are: `backend/` (Java, package `com.careeragent`), `frontend/` (Nex
 
 ### Prerequisites
 
-- JDK 25 and Maven 3.9 or newer
+- JDK 21 or newer and Maven 3.9 or newer
 - Node.js 20 or newer (with npm)
 - A Gemini API key from Google AI Studio (the free tier works)
 
@@ -45,6 +45,35 @@ Open http://localhost:3000. Pages: dashboard, resume, jobs, skills, tailor, pipe
 
 Type `help` to list the commands (agent, alerts, ask, bullet, export, interview, job, prep, resume, stats, track).
 
+### Standalone CLI (runnable jar)
+
+Build the jar once (this skips the tests; run them with `mvn test`):
+
+    cd backend
+    mvn -q -DskipTests package
+    cd ..
+
+This creates `backend/target/career-agent.jar`. Run it from the repository root so it finds `.env` (it also finds `../.env` when started from `backend/`). The deterministic commands work without an API key; the agent, `ask`, prep, bullets and interview commands need one.
+
+| Option | What it does |
+| --- | --- |
+| (no arguments) | Interactive session. Type `help` for commands and `exit` to quit. |
+| `<command> [args]` | Run one command and exit, for example `track list`. |
+| `--input <file>` or `-i` | Send the whole file to the agent as one request and print the answer. Use `-` to read standard input. |
+| `--script <file>` or `-s` | Run one CLI command per line. Blank lines and lines starting with `#` are skipped, `exit` stops early, and all lines share one session. Use `-` to read standard input. |
+| `serve [port]` | Start the HTTP API used by the GUI (default port 7070). |
+| `--help` or `-h` | Show the usage text. |
+
+Exit codes: 0 success, 1 AI or runtime failure, 2 usage or file error.
+
+Examples, from the repository root:
+
+    java -jar backend/target/career-agent.jar --input examples/task.txt
+    java -jar backend/target/career-agent.jar --script examples/session.txt
+    java -jar backend/target/career-agent.jar track list
+    echo Extract the skills from: Java, SQL and Docker | java -jar backend/target/career-agent.jar --input -
+
+`examples/task.txt` is a plain-language request for the agent (needs the Gemini key). `examples/session.txt` is a script of deterministic commands (add applications, move one through the pipeline, show analytics) and works without a key. Data is kept in memory, so separate one-shot runs do not remember each other; use `--script` or the interactive session for multi-step work.
 ### Example usage
 
 In the GUI, open the Resume page, paste resume text or upload a PDF, then use Jobs to import a posting, Skills to see the match, and Tailor to generate a cover letter and export the package. In the CLI, the same features are available through the commands above.

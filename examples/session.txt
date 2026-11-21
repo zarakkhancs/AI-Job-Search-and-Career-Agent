@@ -1,0 +1,12 @@
+# Example script. Run it with:
+#   java -jar backend/target/career-agent.jar --script examples/session.txt
+# Blank lines and lines starting with # are skipped. All lines share one session.
+help
+track add Acme | Software Engineer
+track add Globex | Backend Developer
+track list
+track move 1 apply
+track move 1 interview
+track list
+stats
+alerts

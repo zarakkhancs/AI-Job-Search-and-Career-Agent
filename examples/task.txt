@@ -1,0 +1,1 @@
+Extract the skills from this resume text: Built REST APIs in Java and Spring Boot, wrote SQL queries for PostgreSQL, automated tests with JUnit and wrote Python scripts for data cleanup.
